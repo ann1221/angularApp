@@ -16,11 +16,11 @@ export class CatalogProductComponent implements OnInit {
   }
 
   AddToCart() {
-    this.ProductsService.AddToCart(this.bouquet.bouquet_id);
+    this.ProductsService.AddToOrder(this.bouquet.bouquet_id);
   }
 
   DropFromCart() {
-    this.ProductsService.SubtractFromCart(this.bouquet.bouquet_id);
+    this.ProductsService.SubstractFromOrder(this.bouquet.bouquet_id);
   }
 
   GetAmountInOrder(): number {

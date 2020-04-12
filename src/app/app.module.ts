@@ -29,6 +29,7 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatCardModule} from '@angular/material/card';
 
 import {ProductsServiceService} from './products-service.service';
+import {CookieService} from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -59,9 +60,9 @@ import {ProductsServiceService} from './products-service.service';
     MatInputModule,
     MatIconModule,
     MatBadgeModule,
-    MatCardModule
+    MatCardModule,
   ],
-  providers: [ProductsServiceService, HttpClientModule],
+  providers: [ProductsServiceService, HttpClientModule, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

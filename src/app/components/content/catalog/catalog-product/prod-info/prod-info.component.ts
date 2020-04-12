@@ -25,7 +25,8 @@ export class ProdInfoComponent implements OnInit {
   }
 
   public ChangeAmountInOrder() {
-    console.log(this.amountInOrder);
-    console.log(this.ProductsService.GetBouquetsInOrder());
+    if (this.amountInOrder.toString().length > 0) {
+      console.log(this.amountInOrder);
+    }
   }
 }

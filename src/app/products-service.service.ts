@@ -1,17 +1,24 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {CookieService} from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class ProductsServiceService {
-  constructor() {
+  constructor(public cookieService: CookieService) {
+    console.log(this.cookieService.getAll());
+    const obj = this.cookieService.getAll().toString().split(', ');
+    console.log(obj.toString());
   }
+
   private CATALOG: Bouquet[] = [];
   private bouquetInOrder: BouquetInOrder[] = [];
 
-  private counter = 0;
+  public GetBouquetsInOrder(){
+    return null;
+  }
 
   public SetCatalog(bouquets: Bouquet[]) {
     this.CATALOG = bouquets;
@@ -21,28 +28,21 @@ export class ProductsServiceService {
     return this.CATALOG;
   }
 
-  public GetBouquetsInOrder(): BouquetInOrder[] {
-    return this.bouquetInOrder;
-  }
-
-  private FindInOrder(bouquetId: number): number {
-    console.log('bouquetInOrderLength: ' + this.bouquetInOrder.length);
-    for (let i = 0; i < this.bouquetInOrder.length; i++) {
-      if (this.bouquetInOrder[i].id === bouquetId) {
-        return i;
-      }
+  public GetLenOrder(): number{
+    const cookie = this.cookieService.getAll();
+    if (cookie === null) {
+      return 0;
+    } else {
+      return cookie.toString().split(';').length;
     }
-    return null;
   }
 
   public GetAmountInOrder(bouquetId: number): number {
-    console.log(bouquetId);
-    const index = this.FindInOrder(bouquetId);
-    if ( index === null) {
-      return 0;
-    } else {
-      return this.bouquetInOrder[index].amount;
+    const result = this.cookieService.get('bouq/' + bouquetId.toString());
+    if (result.length > 0){
+      return Number(result);
     }
+    return null;
   }
 
   public GetBouquetById(bouquetId: number): Bouquet {
@@ -55,34 +55,38 @@ export class ProductsServiceService {
   }
 
 
-  public  AddToCart(bouquetId: number) {
-    const index = this.FindInOrder(bouquetId);
+  public AddToOrder(bouquetId: number) {
+    const result = this.cookieService.get('bouq/' + bouquetId.toString());
     const inStock = this.GetBouquetById(bouquetId).in_stock;
-    if ( index === null) {
-      if (inStock >= 1) {
-        const bio: BouquetInOrder = { id: bouquetId , amount: 1};
-        this.bouquetInOrder.push(bio);
-      } else {
-        alert('There are no such bouquets in stock');
-      }
-    } else {
-      if (inStock > this.bouquetInOrder[index].amount) {
-        this.bouquetInOrder[index].amount += 1;
+    if (result.length > 0){
+      if (inStock > Number(result)){
+        this.cookieService.set('bouq/' + bouquetId.toString(),
+                                 (Number(result) + 1).toString(),
+                                  new Date(Date.now() + 86400e3) );
       } else {
         alert('That\'s all, you are grabbed all bouquets from stock' );
+      }
+    } else {
+      if (inStock >= 1){
+        this.cookieService.set('bouq/' + bouquetId.toString(), '1',
+                                new Date(Date.now() + 86400e3));
+      } else {
+        alert('There are no such bouquets in stock');
       }
     }
   }
 
-  public  SubtractFromCart(bouquetId: number) {
-    const index = this.FindInOrder(bouquetId);
-    if ( index === null) {
+  public  SubstractFromOrder(bouquetId: number) {
+    const result = this.cookieService.get('bouq/' + bouquetId.toString());
+    if ( result.length === 0) {
       alert('Nothing to substract');
     } else {
-      if (this.bouquetInOrder[index].amount > 0) {
-        this.bouquetInOrder[index].amount -= 1;
-        if (this.bouquetInOrder[index].amount === 0) {
-          this.bouquetInOrder.splice(index, 1 );
+      if (Number(result) > 0) {
+        this.cookieService.set('bouq/' + bouquetId.toString(),
+                                  (Number(result) - 1).toString(),
+                                  new Date(Date.now() + 86400e3));
+        if (Number(result) - 1 === 0) {
+          this.cookieService.delete('bouq/' + bouquetId.toString());
         }
       } else {
         alert('Nothing to substract');
@@ -91,15 +95,8 @@ export class ProductsServiceService {
   }
 
   public SetAmountInOrder(bouquetId: number, value: number) {
-    if (this.GetBouquetById(bouquetId).in_stock > value ) {
-      const index = this.FindInOrder(bouquetId);
-      if ( index === null) {
-        const bio: BouquetInOrder = {id: bouquetId, amount: value};
-        this.bouquetInOrder.push(bio);
-      } else {
-        this.bouquetInOrder[index].amount = value;
-      }
-    }
+    this.cookieService.set('bouq/' + bouquetId.toString(), value.toString(),
+                            new Date(Date.now() + 86400e3));
   }
 
   public GetBouquetPrice(bouquetId: number) {

@@ -1,44 +1,13 @@
 .roundImg{
   border-radius: 100%;
 }
-input.text {
-  width:  100%;
-  height: 20px;
-  border:1px solid whitesmoke;
-  font-size:13px;
-  color: lightsalmon;
-}
-input::placeholder {
-  font-weight: lighter;
-  color: lightgray;
-}
 
-textarea.text{
-  width:  95%;
-  height: 20px;
-  min-width: 100%;
-  min-height: 60px;
-  max-width: 100%;
-  max-height: 120px;
-  border:1px solid whitesmoke;
-  font-size:13px;
-  color: lightsalmon;
+.btn:focus{
+  outline: 0 !important;
 }
-textarea::placeholder {
-  font-weight: lighter;
-  color: lightgray;
-}
-
-button.submit{
-  border: 0;
-  width: 100%;
-  height: 30px;
-  font-size: 20px;
-  background: #f32f1c;
-  color: white;
-}
-button:hover{
-  background: white;
-  color: red;
-  border:1px solid whitesmoke;
+.btn:active  {
+  outline:0;
+  color: #fff;
+  background-color: #428bca;
+  border-color: #357ebd;
 }
