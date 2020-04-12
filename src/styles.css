@@ -1,1 +1,73 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.tbMargin20{
+  margin: 20px auto 20px auto;
+}
+.tbMargin40{
+  margin: 40px auto 40px auto;
+}
+.tbMargin80{
+  margin: 80px auto 80px auto;
+}
+.wdth100{
+  width: 100%;
+}
+.wdth80{
+  width: 80%;
+}
+.wdth70{
+  width: 70%;
+}
+.wdth50{
+  width: 50%;
+}
+.wdth40{
+  width: 40%;
+}
+.wdth30{
+  width: 30%;
+}
+.txtCenter{
+  text-align: center;
+}
+.redFont{
+  color: red;
+}
+.greyBg{
+  background: #f3f3f3;
+}
+.mintBg{
+  background: honeydew;
+}
+.titleFont{
+  font-family:  'Playfair Display SC', serif;
+  font-weight: lighter;
+}
+.minHeight{
+  min-height: 500px;
+}
+
+.scale img {
+  transition: 2s;
+  display: block;
+}
+.scale img:hover {
+  transform: scale(1.2);
+}
+
+.grayScale img {
+  filter: grayscale(0%);
+}
+.grayScale img:hover {
+  filter: grayscale(50%);
+}
+button:active, button:focus {
+  outline: none;
+}
+
+::selection {background: rgba(255, 82, 72, 0.86); color:#fff;}
+::-moz-selection {background: rgba(255, 82, 72, 0.86); color:#fff;}

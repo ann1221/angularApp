@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+
+import {Bouquet, BouquetInOrder, ProductsServiceService} from '../../../../products-service.service';
 
 @Component({
   selector: 'app-cart-product',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CartProductComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
+  @Input() bouquetsInOrder: BouquetInOrder;
+  @Input() bouquet: Bouquet;
+  constructor(public ProductService: ProductsServiceService) {
   }
 
+  ngOnInit() {
+
+  }
 }

@@ -1,0 +1,26 @@
+hr{
+  border: none; /* Убираем границу для браузера Firefox */
+  color: red; /* Цвет линии для остальных браузеров */
+  background-color: red; /* Цвет линии для браузера Firefox и Opera */
+  height: 2px; /* Толщина линии */
+}
+
+.cartTitles{
+  width: 20%;
+  font-size: 20px;
+}
+
+h2{
+  font-size: 40px;
+}
+
+div.parent{
+  display: table;
+  width: 100%;
+}
+
+div.child{
+  display: table-cell;
+  width: 20%;
+  vertical-align: middle;
+}

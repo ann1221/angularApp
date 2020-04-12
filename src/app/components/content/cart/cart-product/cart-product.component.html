@@ -1,1 +1,13 @@
-<p>cart-product works!</p>
+<div class="wdth100 tbMargin20 parent">
+  <div class="txtCenter child scale">
+    <img style="cursor: pointer;" src="{{bouquet.pict_url}}"
+         [routerLink]="['/prod',bouquet.bouquet_id]" width="100%"></div>
+  <div class="txtCenter child"
+       *ngFor="let i of [bouquet.name,
+                  bouquet.description,
+                  bouquetsInOrder.amount,
+                  this.ProductService.GetBouquetPrice(bouquet.bouquet_id)]">
+    <p style="font-size: 25px;">{{i}}</p>
+  </div>
+</div>
+

@@ -1,0 +1,15 @@
+@import url(https://fonts.googleapis.com/css?family=Arimo:400,400italic|Playfair+Display+SC:400,700&subset=latin,cyrillic);
+.right{
+  margin-right: 0;
+}
+h1{
+  font-size: 40pt;
+  margin: 0;
+}
+button{
+  font-size: 20px;
+}
+
+h1:active, h1:focus {
+  outline: none;
+}

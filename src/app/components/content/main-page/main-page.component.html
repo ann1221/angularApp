@@ -1,1 +1,73 @@
-<p>main-page works!</p>
+<div class="wdth100" [style.background] ="'url(' + pathToMainImg +')'" (click)="OnClick()">
+  <div class="titleDiv">
+    <h3 class="tbMargin20"> Send <span class="redFont">flowers</span> like you mean it.</h3>
+    <p> Where flowers are our inspiration to create lasting memories.
+      Whatever the occarion,
+      our flowers will make it special cursus a sit amet mauris.
+    </p>
+    <h3><span class="redFont">DUBNA</span> STATE UNIVERSITY</h3>
+  </div>
+</div>
+
+<div class="wdth80 tbMargin40">
+  <mat-grid-list class="scale" cols="6" rowHeight="1:1" gutterSize="10">
+    <mat-grid-tile  *ngFor="let ends of topImg">
+      <img src="{{startOfPathToImgs}}{{ends}}" [textContent]="topImg" width="100%">
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+
+<div class="wdth50 tbMargin40 txtCenter">
+  <p><img src="../../../assets/mainPage/FlowerSeparator1.jpg"></p>
+  <p>
+    “Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
+    ligula eget dolor. Aenean masa. ”
+  </p>
+</div>
+
+<div class="wdth80 tbMargin20">
+  <mat-grid-list cols="6" rowHeight="1:1" gutterSize="10">
+    <mat-grid-tile class="scale"  *ngFor="let ends of Sq">
+      <img src="{{startOfPathToImgs}}{{ends}}" width="100%" >
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+
+
+<div class="tbMargin40 txtCenter">
+  <br>
+  <p class = "tbMargin20"><img src="../../../assets/mainPage/FlowerSeparator3.jpg"></p>
+  <h3> MAKE SOMEONE HAPPY</h3>
+  <p class="wdth50 tbMargin20">“Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+    Aenean commodo ligula eget dolor. Aenean masa.”</p>
+  <br>
+</div>
+
+<div class="wdth70 tbMargin40">
+  <mat-grid-list class="scale" cols="4" rowHeight="1:1" gutterSize="20" >
+    <mat-grid-tile *ngFor="let elem of MakeSomHap" [colspan]="elem.colspan" [rowspan]="elem.rowspan">
+      <img src="{{startOfPathToImgs}}{{elem.title}}" width="100%">
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+
+<div class="tbMargin40 txtCenter">
+  <br>
+  <p class="tbMargin20"><img src="../../../assets/mainPage/FlowerSeparator2.jpg"></p>
+  <p class="wdth30 tbMargin20"> “WITH US THE WEDDING WILL BE THE BEST MOMENT IN YOUR LIFE”</p>
+  <br>
+</div>
+
+<div class="wdth70 tbMargin40 txtCenter">
+  <mat-grid-list class="scale"  cols="3" rowHeight="1:1" gutterSize="40" >
+    <mat-grid-tile *ngFor="let ends of Wedd"><img src="{{startOfPathToImgs}}{{ends}}" width="100%"></mat-grid-tile>
+  </mat-grid-list>
+</div>
+
+
+<div class="wdth50 tbMargin40 txtCenter">
+  <p><img src="../../../assets/mainPage/FlowerSeparator5.jpg"></p>
+</div>
+
+
+

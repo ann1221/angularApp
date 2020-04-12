@@ -1,1 +1,22 @@
-<p>catalog-product works!</p>
+<div class="card">
+
+  <div id="header">
+    <p>{{bouquet.name}}</p>
+  </div>
+
+  <div id="body">
+    <img src={{bouquet.pict_url}}
+         [routerLink]="['/prod', bouquet.bouquet_id]"
+         alt="photo not found"
+         width="100%"
+         style="box-shadow: 0 0 10px rgba(0,0,0,0.1);
+           cursor: pointer;">
+  </div>
+
+  <div id="footer" style="display: flex;">
+    <button (click) = "AddToCart()">+</button>
+    <button (click) = "DropFromCart()">-</button>
+    <input type="text" disabled placeholder="{{this.GetAmountInOrder()}}">
+  </div>
+</div>
+

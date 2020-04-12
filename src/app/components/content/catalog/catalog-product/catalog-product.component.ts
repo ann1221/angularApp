@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Bouquet, ProductsServiceService} from '../../../../products-service.service';
+
 
 @Component({
   selector: 'app-catalog-product',
@@ -6,10 +8,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./catalog-product.component.css']
 })
 export class CatalogProductComponent implements OnInit {
+  constructor(public ProductsService: ProductsServiceService) {
+  }
 
-  constructor() { }
+  @Input() bouquet: Bouquet;
+  ngOnInit() {
+  }
 
-  ngOnInit(): void {
+  AddToCart() {
+    this.ProductsService.AddToCart(this.bouquet.bouquet_id);
+  }
+
+  DropFromCart() {
+    this.ProductsService.SubtractFromCart(this.bouquet.bouquet_id);
+  }
+
+  GetAmountInOrder(): number {
+    return this.ProductsService.GetAmountInOrder(this.bouquet.bouquet_id);
   }
 
 }

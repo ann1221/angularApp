@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class ProductsServiceService {
+  constructor() {
+  }
   private CATALOG: Bouquet[] = [];
   private bouquetInOrder: BouquetInOrder[] = [];
 

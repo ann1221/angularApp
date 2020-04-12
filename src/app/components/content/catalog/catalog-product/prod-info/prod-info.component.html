@@ -1,1 +1,50 @@
-<p>prod-info works!</p>
+<div class="minHeight wdth70 tbMargin20">
+  <div *ngIf="this.bouquet; else bouquetNotFoundError">
+
+    <div id="header" class="tbMargin20">
+      <hr>
+      <h1 class="txtCenter titleFont">{{bouquet.name}}</h1>
+      <hr>
+    </div>
+
+    <div id="body" class="wdth100" style="display: flex;">
+
+      <div class="wdth50">
+        <img src="{{this.bouquet.pict_url}}" width="100%">
+      </div>
+
+      <div class="wdth50" style="margin-left: 3%;">
+        <div style="background: honeydew; padding: 5%;">
+          <h3 class="txtCenter"> DESCRIPRION: </h3>
+          <p style="text-align: justify; text-indent: 30px;">{{bouquet.description}}</p>
+        </div>
+
+        <h3 class="txtCenter titleFont">FLOWER COMPOSITION: </h3>
+
+        <div *ngFor="let prodInBouq of bouquet.productsInBouquet">
+          <mat-grid-list cols="2" rowHeight="6:1" gutterSize="1%" style="margin: 2px auto">
+            <mat-grid-tile style="background: honeydew;">
+              {{prodInBouq.product.name}}
+            </mat-grid-tile>
+            <mat-grid-tile style="background: honeydew;">
+              {{prodInBouq.amount}}
+            </mat-grid-tile>
+          </mat-grid-list>
+        </div>
+
+        <p> PRODUCT'S COST: {{this.ProductsService.GetBouquetPrice(bouquetId)}}
+
+          <mat-form-field class="example-full-width">
+            <mat-label>IN YOUR CART NOW: </mat-label>
+            <input matInput
+                   [(ngModel)]="amountInOrder"
+                   (ngModelChange)="ChangeAmountInOrder()"  pattern="[0-9]+">
+          </mat-form-field>
+
+      </div>
+    </div>
+  </div>
+  <ng-template #bouquetNotFoundError>
+    <h1 class="titleFont txtCenter">BOUQUET NOT FOUND</h1>
+  </ng-template>
+</div>

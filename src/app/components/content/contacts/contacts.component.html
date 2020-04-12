@@ -1,1 +1,41 @@
-<p>contacts works!</p>
+<div class="minHeight tbMargin20">
+  <mat-grid-list cols="1" rowHeight="3:1">
+    <mat-grid-tile>
+      <img src="{{partImgPath}}{{endsOfPath[0]}}" width="100%">
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <div class="wdth70 tbMargin20 txtCenter" style="display: flex;">
+    <div style="margin: auto 1% auto 1%; width: 45%;">
+      <img src="{{partImgPath}}{{endsOfPath[1]}}" width="50%" class="roundImg">
+      <p> We take <span class="redFont">flowers</span>  personally, with your thoughts in hand…</p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+        Aenean commodo ligula eget dolor. Aenean massa.
+        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+        Donec quam felis, ultricies nec.
+      </p>
+    </div>
+    <div style="margin: auto 1% auto 1%; width: 45%; padding-left: 1%; padding-right: 1%;">
+      <p style="text-align: center">Get <span class="redFont"> in Touch!</span></p>
+      <p style="font-size: 10px;">
+        Class aptent taciti sociosqu ad litora torquent per conubia nostr.
+        Mauris in erat justullam ac urna eu felis dapib
+      </p>
+      <form>
+        <p><input class="text" type="text" placeholder="Your full name..." name="txt1"> </p>
+        <p><input class="text" type="text" placeholder="Email" name="txt2"> </p>
+        <p><input class="text" type="text" placeholder="Phone" name="txt3"> </p>
+        <p><textarea class="text" placeholder="Write somethig..."></textarea></p>
+        <button class="submit" type="submit">submit</button>
+
+        <mat-grid-list cols="4" rowHeight="1:1" style="margin-top: 10px;">
+          <mat-grid-tile *ngFor="let item of endsOfPath | slice:2">
+            <img src="{{partImgPath}}{{item}}" width="100%">
+          </mat-grid-tile>
+        </mat-grid-list>
+      </form>
+
+    </div>
+  </div>
+</div>

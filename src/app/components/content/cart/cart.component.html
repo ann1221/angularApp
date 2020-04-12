@@ -1,1 +1,25 @@
-<p>cart works!</p>
+<div class="minHeight wdth70 tbMargin20">
+
+  <div *ngIf="this.ProductsService.GetBouquetsInOrder().length > 0; else orderIsEmptyError">
+    <h2 class = "titleFont txtCenter">YOUR CART:</h2>
+    <div class="parent">
+
+      <div class="titleFont txtCenter cartTitles child" *ngFor="let title of titles">{{title}}</div>
+    </div>
+
+    <app-cart-product *ngFor="let item of this.ProductsService.GetBouquetsInOrder()"
+                      [bouquetsInOrder]="item"
+                      [bouquet]="this.ProductsService.GetBouquetById(item.id)"></app-cart-product>
+
+    <hr class="redFont">
+    <h2 class="titleFont txtCenter"> TOTAL: {{GetToTalSum()}}</h2>
+    <app-user-form></app-user-form>
+  </div>
+
+  <ng-template #orderIsEmptyError>
+    <h2 class = "titleFont txtCenter">YOUR CART IS EMPTY NOW...</h2>
+  </ng-template>
+
+</div>
+
+

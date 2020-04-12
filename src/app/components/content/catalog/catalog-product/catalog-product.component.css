@@ -1,0 +1,35 @@
+.card{
+  padding: 1%;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  width: 20%;
+  display: inline-block;
+  margin: 15px 1% 15px 1%;
+}
+p{
+  padding: 2px;
+  margin: 2px;
+}
+button{
+  background: white;
+  width: 20%;
+  margin: 1%;
+  padding: 2%;
+  border: 0;
+  font-size: 20px;
+  cursor: pointer;
+}
+button:hover{
+  background: #f3f3f3;
+  border-radius: 5px;
+}
+input{
+  width: 20%;
+  margin: 10px 0 10px auto;
+  padding: 5px 10px 5px 10px;
+  background: white;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  text-align: center;
+}

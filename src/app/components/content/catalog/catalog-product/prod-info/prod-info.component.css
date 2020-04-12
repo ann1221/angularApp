@@ -1,0 +1,26 @@
+h1,h3{
+  test-transform: uppercase;
+}
+h1{
+  font-size: 40px;
+}
+h3{
+  font-size: 20px;
+}
+
+hr {
+  width: 100%;
+  border: none; /* Убираем границу для браузера Firefox */
+  color: lightgrey; /* Цвет линии для остальных браузеров */
+  background-color: lightgrey; /* Цвет линии для браузера Firefox и Opera */
+  height: 1px; /* Толщина линии */
+}
+
+div.parent{
+  display: table;
+}
+div.child{
+  background: honeydew;
+  display: table-cell;
+  vertical-align: middle;
+}

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-contacts',
@@ -8,8 +9,9 @@ import { Component, OnInit } from '@angular/core';
 export class ContactsComponent implements OnInit {
 
   constructor() { }
-
-  ngOnInit(): void {
+  partImgPath = '../../../../assets/Contacts/';
+  endsOfPath: string[] = ['abUs1.jpg', 'abUs2.jpg', 'abUs3.jpg', 'abUs4.jpg', 'abUs5.jpg', 'abUs6.jpg'];
+  ngOnInit() {
   }
 
 }
