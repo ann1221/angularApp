@@ -28,8 +28,10 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatCardModule} from '@angular/material/card';
 
-import {ProductsServiceService} from './products-service.service';
+import {OrderService} from './order.service';
 import {CookieService} from 'ngx-cookie-service';
+import {MatListModule} from '@angular/material/list';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -53,6 +55,7 @@ import {CookieService} from 'ngx-cookie-service';
     ReactiveFormsModule,
     FormsModule,
     MatToolbarModule,
+    MatListModule,
     MatFormFieldModule,
     MatMenuModule,
     MatButtonModule,
@@ -61,8 +64,9 @@ import {CookieService} from 'ngx-cookie-service';
     MatIconModule,
     MatBadgeModule,
     MatCardModule,
+    MatSelectModule,
   ],
-  providers: [ProductsServiceService, HttpClientModule, CookieService],
+  providers: [OrderService, HttpClientModule, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

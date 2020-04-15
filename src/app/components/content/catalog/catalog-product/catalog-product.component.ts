@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Bouquet, ProductsServiceService} from '../../../../products-service.service';
+import {Bouquet, OrderService} from '../../../../order.service';
 
 
 @Component({
@@ -8,7 +8,7 @@ import {Bouquet, ProductsServiceService} from '../../../../products-service.serv
   styleUrls: ['./catalog-product.component.css']
 })
 export class CatalogProductComponent implements OnInit {
-  constructor(public ProductsService: ProductsServiceService) {
+  constructor(public orderService: OrderService) {
   }
 
   @Input() bouquet: Bouquet;
@@ -16,15 +16,15 @@ export class CatalogProductComponent implements OnInit {
   }
 
   AddToCart() {
-    this.ProductsService.AddToOrder(this.bouquet.bouquet_id);
+    this.orderService.AddToOrder(this.bouquet.bouquet_id);
   }
 
   DropFromCart() {
-    this.ProductsService.SubstractFromOrder(this.bouquet.bouquet_id);
+    this.orderService.SubstractFromOrder(this.bouquet.bouquet_id);
   }
 
   GetAmountInOrder(): number {
-    return this.ProductsService.GetAmountInOrder(this.bouquet.bouquet_id);
+    return this.orderService.GetAmountOfBouquet(this.bouquet.bouquet_id);
   }
 
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ProductsServiceService} from '../../products-service.service';
+import {OrderService} from '../../order.service';
 
 @Component({
   selector: 'app-header',
@@ -8,7 +8,7 @@ import {ProductsServiceService} from '../../products-service.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(public ProductsService: ProductsServiceService) { }
+  constructor(public ProductsService: OrderService) { }
 
   ngOnInit(): void {
   }

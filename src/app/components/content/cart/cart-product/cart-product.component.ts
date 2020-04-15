@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import {Bouquet, BouquetInOrder, ProductsServiceService} from '../../../../products-service.service';
+import {Bouquet, OrderUnit, OrderService} from '../../../../order.service';
 
 @Component({
   selector: 'app-cart-product',
@@ -9,12 +9,14 @@ import {Bouquet, BouquetInOrder, ProductsServiceService} from '../../../../produ
 })
 export class CartProductComponent implements OnInit {
 
-  @Input() bouquetsInOrder: BouquetInOrder;
+
+  @Input() orderUnit: OrderUnit;
   @Input() bouquet: Bouquet;
-  constructor(public ProductService: ProductsServiceService) {
+  constructor(public orderService: OrderService) {
   }
 
   ngOnInit() {
 
   }
+
 }

@@ -34,18 +34,21 @@ export class MainPageComponent implements OnInit {
     ];
 
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
     this.pathToMainImg = '../../../assets/mainPage/MainFont1.jpg';
   }
+
+
+
   OnClick() {
     if (this.counter > 3) {
       this.counter = 1;
     }
     this.pathToMainImg = '../../../assets/mainPage/MainFont' + this.counter + '.jpg';
-    console.log(this.pathToMainImg);
-    this.counter += 1;
+    this.counter++;
   }
 }
 

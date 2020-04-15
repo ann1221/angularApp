@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Bouquet, ProductsServiceService, BouquetInOrder} from '../../../products-service.service';
-
+import {Bouquet, OrderService, OrderUnit} from '../../../order.service';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-cart',
@@ -9,23 +9,27 @@ import {Bouquet, ProductsServiceService, BouquetInOrder} from '../../../products
 })
 export class CartComponent implements OnInit {
 
-  constructor(public ProductsService: ProductsServiceService) {
-    console.log(this.ProductsService.GetBouquetsInOrder());
+
+  constructor(public orderService: OrderService) {
   }
 
+
   titles: string[] = ['', 'Title:', 'Description:', 'Count:', 'Cost:' ];
+
+
+  GetToTalSum(): number {
+    const order: OrderUnit[] = this.orderService.getOrder();
+    let total = 0;
+    for (const bouquetInOrder of order) {
+      total += this.orderService.GetBouquetPrice(bouquetInOrder.bouquet_id) * bouquetInOrder.amount;
+    }
+    return total;
+  }
+
 
   ngOnInit() {
   }
 
-  GetToTalSum(): number {
-    const order: BouquetInOrder[] = this.ProductsService.GetBouquetsInOrder();
-    let total = 0;
-    for (const bouquetInOrder of order) {
-      total += this.ProductsService.GetBouquetPrice(bouquetInOrder.id) * bouquetInOrder.amount;
-    }
-    return total;
-  }
 
 }
 

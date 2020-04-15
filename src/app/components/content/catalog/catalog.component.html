@@ -1,4 +1,4 @@
 <div class="minHeight wdth70 tbMargin20 grayScale">
   <h2 class = "titleFont txtCenter">OUR PRODUCTS:</h2>
-  <app-catalog-product *ngFor="let item of this.ProductsService.GetCatalog()" [bouquet]="item"></app-catalog-product>
+  <app-catalog-product *ngFor="let item of this.orderService.GetCatalog()" [bouquet]="item"></app-catalog-product>
 </div>

@@ -32,15 +32,19 @@
           </mat-grid-list>
         </div>
 
-        <p> PRODUCT'S COST: {{this.ProductsService.GetBouquetPrice(bouquetId)}}
-
-          <mat-form-field class="example-full-width">
-            <mat-label>IN YOUR CART NOW: </mat-label>
-            <input matInput
-                   [(ngModel)]="amountInOrder"
-                   (ngModelChange)="ChangeAmountInOrder()"  pattern="[0-9]+">
+        <div style="display: flex">
+          <mat-form-field style="width: 50%;">
+            <mat-label class="titleFont">PRICE</mat-label>
+            <input matInput disabled value="{{this.ProductsService.GetBouquetPrice(bouquetId)}}">
           </mat-form-field>
 
+          <mat-form-field style="width: 49%;">
+            <mat-label>IN YOUR CART NOW: </mat-label>
+            <mat-select #fontSize value="{{amountInOrder}}" (selectionChange)="itemChanged($event.value)">
+              <mat-option *ngFor='let i of makeArray(bouquet.in_stock)' value="{{i}}">{{i}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
       </div>
     </div>
   </div>

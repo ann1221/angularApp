@@ -21,18 +21,20 @@
         Mauris in erat justullam ac urna eu felis dapib
       </p>
 
-      <form>
+      <form [formGroup]="commentReactiveForm">
+
         <mat-form-field class="wdth100">
-          <mat-label>Your Name</mat-label>
-          <input matInput placeholder="Enter full name or nickname" value="">
+          <mat-label for="name">Your Name</mat-label>
+          <input matInput placeholder="Enter full name or nickname" id="name" formControlName="name" value="">
         </mat-form-field>
 
         <mat-form-field class="wdth100">
-          <mat-label>Leave a comment</mat-label>
-          <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+          <mat-label for="comment">Leave a comment</mat-label>
+          <textarea matInput id="comment" formControlName="comment" placeholder="Ex. It makes me feel..."></textarea>
         </mat-form-field>
 
-        <button mat-button color="primary" style="width: 100%">Submit</button>
+        <button mat-button color="primary" style="width: 100%"
+                [disabled]="commentReactiveForm.invalid" (click)="onSubmit()" >Submit</button>
 
         <mat-grid-list cols="4" rowHeight="1:1" style="margin-top: 10px;">
           <mat-grid-tile *ngFor="let item of endsOfPath | slice:2">
