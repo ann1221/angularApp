@@ -79,6 +79,13 @@ export class UserFormComponent implements OnInit {
   }
   onSubmit() {
     const controls = this.clientReactiveForm.controls;
+    if (this.clientReactiveForm.invalid) {
+      Object.keys(controls)
+        .forEach(controlName => controls[controlName].markAsTouched());
+      this.orderService.openSnackBar('Пожалуйта, заполните все обязательные поля корректно', 'Ок');
+      return;
+    }
+
     console.log(this.clientReactiveForm.value);
 
     const client: Client = {

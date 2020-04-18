@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
+import {OrderService} from '../../order.service';
 
 @Component({
   selector: 'app-footer',
@@ -9,7 +10,7 @@ import {ErrorStateMatcher} from '@angular/material/core';
 })
 export class FooterComponent implements OnInit {
   emailReactiveForm: FormGroup;
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private orderService: OrderService) {}
 
   ngOnInit() {
     this.initForm();
@@ -34,6 +35,13 @@ export class FooterComponent implements OnInit {
   }
 
   onSubmit() {
+    const controls = this.emailReactiveForm.controls;
+    if (this.emailReactiveForm.invalid) {
+      Object.keys(controls)
+        .forEach(controlName => controls[controlName].markAsTouched());
+      this.orderService.openSnackBar('Пожалуйта, введите почту корректно', 'Ок');
+      return;
+    }
     console.log(this.emailReactiveForm.value);
   }
 

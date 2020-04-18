@@ -1,22 +1,27 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {CookieService} from 'ngx-cookie-service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
 })
 
-
-
 export class OrderService {
   CATALOG: Bouquet[];
-  constructor(public cookieService: CookieService, public http: HttpClient) {
+  constructor(public cookieService: CookieService, public http: HttpClient, private snackBar: MatSnackBar) {
     this.http.get<Bouquet[]>('http://localhost:8080/getCatalog').subscribe(result => {
       this.CATALOG = result; console.log(this.CATALOG); });
   }
 
   public GetCatalog(): Bouquet[] {
     return this.CATALOG;
+  }
+
+  public SetCatalog() {
+    this.http.get<Bouquet[]>('http://localhost:8080/getCatalog').subscribe(result => {
+      this.CATALOG = result;
+      console.log(this.CATALOG); });
   }
 
 
@@ -79,14 +84,14 @@ export class OrderService {
           (Number(result) + 1).toString(),
           new Date(Date.now() + 86400e3) );
       } else {
-        alert('You already grabbed all this bouquet from stock..');
+        this.openSnackBar('You already grabbed all this bouquet from stock..', 'okaay');
       }
     } else {
       if (inStock > 0) {
         this.cookieService.set('bouq/' + bouquetId.toString(), '1',
           new Date(Date.now() + 86400e3));
       } else {
-        alert('Bouquet not found in stock');
+        this.openSnackBar('Bouquet not found in stock', 'okaay');
       }
     }
   }
@@ -94,7 +99,7 @@ export class OrderService {
   public  SubstractFromOrder(bouquetId: number) {
     const result = this.cookieService.get('bouq/' + bouquetId.toString());
     if ( result.length === 0) {
-      alert('Nothing to substract');
+      this.openSnackBar('Nothing to substract', 'okaay');
     } else {
       if (Number(result) > 0) {
         this.cookieService.set('bouq/' + bouquetId.toString(),
@@ -104,7 +109,7 @@ export class OrderService {
           this.cookieService.delete('bouq/' + bouquetId.toString());
         }
       } else {
-        alert('Nothing to substract');
+        this.openSnackBar('Nothing to substract', 'okaay');
       }
     }
   }
@@ -120,11 +125,15 @@ export class OrderService {
         new Date(Date.now() + 86400e3));
     }
     else {
-      alert('You already grabbed all this bouquet from stock..');
+      this.openSnackBar('You already grabbed all this bouquet from stock..', 'okaay');
     }
   }
 
-
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 3000,
+    });
+  }
 }
 
 export interface OrderUnit {

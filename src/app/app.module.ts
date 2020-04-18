@@ -32,6 +32,7 @@ import {OrderService} from './order.service';
 import {CookieService} from 'ngx-cookie-service';
 import {MatListModule} from '@angular/material/list';
 import {MatSelectModule} from '@angular/material/select';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,7 @@ import {MatSelectModule} from '@angular/material/select';
     MatCardModule,
     MatSelectModule,
   ],
-  providers: [OrderService, HttpClientModule, CookieService],
+  providers: [OrderService, HttpClientModule, CookieService, MatSnackBar],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

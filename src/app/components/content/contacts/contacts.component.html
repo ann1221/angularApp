@@ -33,8 +33,7 @@
           <textarea matInput id="comment" formControlName="comment" placeholder="Ex. It makes me feel..."></textarea>
         </mat-form-field>
 
-        <button mat-button color="primary" style="width: 100%"
-                [disabled]="commentReactiveForm.invalid" (click)="onSubmit()" >Submit</button>
+        <button mat-button color="primary" style="width: 100%" (click)="onSubmit()" >Submit</button>
 
         <mat-grid-list cols="4" rowHeight="1:1" style="margin-top: 10px;">
           <mat-grid-tile *ngFor="let item of endsOfPath | slice:2">
