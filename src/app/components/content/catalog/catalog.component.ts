@@ -11,9 +11,6 @@ import {CookieService} from 'ngx-cookie-service';
 export class CatalogComponent implements OnInit {
 
   constructor(public orderService: OrderService) {
-    // this.http.get<Bouquet[]>('http://localhost:8080/main/getCatalog').subscribe(result => {
-    //   this.CATALOG = result;
-    // });
   }
 
   ngOnInit() {  }

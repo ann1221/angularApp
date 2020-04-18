@@ -69,4 +69,4 @@ import {MatSelectModule} from '@angular/material/select';
   providers: [OrderService, HttpClientModule, CookieService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

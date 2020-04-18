@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {OrderService} from '../../../../order.service';
 
 @Component({
   selector: 'app-user-form',
@@ -10,7 +11,7 @@ import {HttpClient} from '@angular/common/http';
 })
 export class UserFormComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private http: HttpClient) { }
+  constructor(private fb: FormBuilder, private http: HttpClient, private orderService: OrderService) { }
 
   clientReactiveForm: FormGroup;
 
@@ -79,6 +80,35 @@ export class UserFormComponent implements OnInit {
   onSubmit() {
     const controls = this.clientReactiveForm.controls;
     console.log(this.clientReactiveForm.value);
+
+    const client: Client = {
+      fname: controls.fname.value,
+      sname: controls.sname.value,
+      lname: controls.lname.value,
+      phone_number: controls.phone.value,
+      address: controls.state.value.trim() + ';' + controls.city.value.trim() +
+        ';' + controls.postalCode.value.trim() + ';' + controls.address.value.trim(),
+      email: controls.email.value.trim()
+    };
+
+    const heads = { 'content-type': 'application/json'};
+    const body = JSON.stringify(client);
+    const parametrs = new HttpParams().set('bouquetList', JSON.stringify(this.GetOrder()));
+
+    this.http.post('http://localhost:8080/addClientOrder', body,
+      {headers: heads, params: parametrs}).subscribe( result => {
+        console.log('received');
+    }, error => {
+        console.log('not received');
+    });
+  }
+
+  GetOrder(){
+    const map: { [key: string]: string} = {};
+    for (const orderUnit of this.orderService.getOrder()) {
+      map[orderUnit.bouquet_id.toString()] = orderUnit.amount.toString();
+    }
+    return map;
   }
 
   isControlInvalid(controlName: string): boolean {
@@ -88,17 +118,13 @@ export class UserFormComponent implements OnInit {
 
     return result;
   }
-
 }
 
 export interface Client {
   fname: string;
   sname: string;
   lname: string;
-  phone: string;
+  phone_number: string;
   email: string;
   address: string;
-  city: string;
-  state: string;
-  postalCode: string;
 }

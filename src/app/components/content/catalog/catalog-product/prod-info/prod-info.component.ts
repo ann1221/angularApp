@@ -17,7 +17,7 @@ export class ProdInfoComponent implements OnInit {
   constructor(public ProductsService: OrderService,
               public activateRoute: ActivatedRoute,
               public http: HttpClient) {
-    this.http.get<Bouquet>('http://localhost:8080/main/getBouquet?bouquetId=' + this.bouquetId.toString())
+    this.http.get<Bouquet>('http://localhost:8080/getBouquet?bouquetId=' + this.bouquetId.toString())
       .subscribe(result => {
         this.bouquet = result;
         console.log(this.bouquet);

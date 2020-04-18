@@ -9,10 +9,9 @@ import {CookieService} from 'ngx-cookie-service';
 
 
 export class OrderService {
-
   CATALOG: Bouquet[];
   constructor(public cookieService: CookieService, public http: HttpClient) {
-    this.http.get<Bouquet[]>('http://localhost:8080/main/getCatalog').subscribe(result => {
+    this.http.get<Bouquet[]>('http://localhost:8080/getCatalog').subscribe(result => {
       this.CATALOG = result; console.log(this.CATALOG); });
   }
 
