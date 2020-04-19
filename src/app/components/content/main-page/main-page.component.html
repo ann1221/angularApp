@@ -1,17 +1,17 @@
-<ngb-carousel cycle class="tbMargin20">
+
+
+<ngb-carousel [pauseOnHover]="false" interval="5000"  class="tbMargin20" >
   <ng-template ngbSlide *ngFor="let i of [0, 1, 2]">
     <div class="picsum-img-wrapper">
       <img src="{{pathToMainImg[i]}}" alt="Angular Carousel {{i}}">
     </div>
     <div class="carousel-caption">
-      <h3>Send <span class="redFont">flowers</span> like you mean it.</h3>
-      <p> Where flowers are our inspiration to create lasting memories.
-        Whatever the occarion
+      <h3>Расскажите о своих <span class="redFont">чувствах </span>на языке цветов</h3>
+      <p> Цветы &#8212; это наше вдохновение для создания прочных воспоминаний.
       </p>
     </div>
   </ng-template>
 </ngb-carousel>
-
 
 <div class="wdth80 tbMargin40">
   <mat-grid-list class="scale" cols="6" rowHeight="1:1" gutterSize="10">
@@ -23,10 +23,7 @@
 
 <div class="wdth50 tbMargin40 txtCenter">
   <p><img src="../../../assets/mainPage/FlowerSeparator1.jpg"></p>
-  <p>
-    “Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
-    ligula eget dolor. Aenean masa. ”
-  </p>
+  <p>“Дарите женщинам цветы. Не только в праздники, как водится, а средь забот и суеты. ”</p>
 </div>
 
 <div class="wdth80 tbMargin20">
@@ -37,13 +34,12 @@
   </mat-grid-list>
 </div>
 
-
 <div class="tbMargin40 txtCenter">
   <br>
   <p class = "tbMargin20"><img src="../../../assets/mainPage/FlowerSeparator3.jpg"></p>
-  <h3> MAKE SOMEONE HAPPY</h3>
-  <p class="wdth50 tbMargin20">“Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-    Aenean commodo ligula eget dolor. Aenean masa.”</p>
+  <h3>СДЕЛАЙ КОГО-НИБУДЬ СЧАСЛИВЫМ</h3>
+  <p class="wdth50 tbMargin20">Порадуйте своего близкого человека цветами. Абсолютно каждая женщина ждет
+  своего букета.</p>
   <br>
 </div>
 
@@ -58,7 +54,8 @@
 <div class="tbMargin40 txtCenter">
   <br>
   <p class="tbMargin20"><img src="../../../assets/mainPage/FlowerSeparator2.jpg"></p>
-  <p class="wdth30 tbMargin20"> “WITH US THE WEDDING WILL BE THE BEST MOMENT IN YOUR LIFE”</p>
+  <h3>ЗАКАЗЫВАЙТЕ У НАС СВАДЕБНЫЕ БУКЕТЫ</h3>
+  <p class="wdth40 tbMargin20"> Мы поможем сделать свадьбу одним из лучших моментов вашей жизни.</p>
   <br>
 </div>
 

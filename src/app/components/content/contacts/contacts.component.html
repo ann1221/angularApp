@@ -8,32 +8,35 @@
   <div class="wdth70 tbMargin20 txtCenter" style="display: flex;">
     <div style="margin: auto 1% auto 1%; width: 45%;">
       <img src="{{partImgPath}}{{endsOfPath[1]}}" width="50%" class="roundImg">
-      <p style="font-size: 30px;"> We take <span class="redFont">flowers</span>  personally, with your thoughts in hand…</p>
+      <p style="font-size: 30px;">Каждый <span class="redFont">букет</span>  &#8212; искусство</p>
       <p style="font-size: 20px;">
-        Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-        Aenean commodo ligula eget dolor. Aenean massa.
+        Мы изготавливаем каждый букет персонально, тщательно прорабатывая каждое наше творение.
       </p>
     </div>
     <div style="margin: auto 1% auto 1%; width: 45%; padding-left: 1%; padding-right: 1%;">
-      <p class="txtCenter" style="font-size: 30px;">Get us<span class="redFont"> in Touch!</span></p>
+      <p class="txtCenter" style="font-size: 30px;">Давайте поддерживать<span class="redFont"> связь!</span></p>
       <p style="font-size: 20px;">
-        Class aptent taciti sociosqu ad litora torquent per conubia nostr.
-        Mauris in erat justullam ac urna eu felis dapib
+        Мы будем очень рады вашей критике, оставляйте нам свои комментарии и пожелания и вместе с вами мы будем становиться лучше!
       </p>
 
       <form [formGroup]="commentReactiveForm">
 
         <mat-form-field class="wdth100">
-          <mat-label for="name">Your Name</mat-label>
-          <input matInput placeholder="Enter full name or nickname" id="name" formControlName="name" value="">
+          <mat-label for="fname">Фамилия</mat-label>
+          <input matInput placeholder="Введите свою фамилию" id="fname" formControlName="fname" value="">
         </mat-form-field>
 
         <mat-form-field class="wdth100">
-          <mat-label for="comment">Leave a comment</mat-label>
-          <textarea matInput id="comment" formControlName="comment" placeholder="Ex. It makes me feel..."></textarea>
+          <mat-label for="sname">Имя</mat-label>
+          <input matInput placeholder="Введите свое имя" id="sname" formControlName="sname" value="">
         </mat-form-field>
 
-        <button mat-button color="primary" style="width: 100%" (click)="onSubmit()" >Submit</button>
+        <mat-form-field class="wdth100">
+          <mat-label for="comment">Оставьте комментарий</mat-label>
+          <textarea matInput id="comment" formControlName="comment" placeholder="Мне кажется, что..."></textarea>
+        </mat-form-field>
+
+        <button mat-button color="primary" style="width: 100%" (click)="onSubmit()" >Отправить</button>
 
         <mat-grid-list cols="4" rowHeight="1:1" style="margin-top: 10px;">
           <mat-grid-tile *ngFor="let item of endsOfPath | slice:2">

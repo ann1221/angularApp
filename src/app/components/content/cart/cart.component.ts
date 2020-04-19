@@ -14,7 +14,7 @@ export class CartComponent implements OnInit {
   }
 
 
-  titles: string[] = ['', 'Title:', 'Description:', 'Count:', 'Cost:' ];
+  titles: string[] = ['', 'Название:', 'Описание:', 'Количество:', 'Цена:' ];
 
 
   GetToTalSum(): number {

@@ -3,7 +3,7 @@
 
     <div id="header" class="tbMargin20">
       <hr>
-      <h1 class="txtCenter titleFont">{{bouquet.name}}</h1>
+      <h1 class="txtCenter displaySCFront">{{bouquet.name}}</h1>
       <hr>
     </div>
 
@@ -15,31 +15,31 @@
 
       <div class="wdth50" style="margin-left: 3%;">
         <div style="background: honeydew; padding: 5%;">
-          <h3 class="txtCenter"> DESCRIPRION: </h3>
+          <h3 class="txtCenter"> ОПИСАНИЕ: </h3>
           <p style="text-align: justify; text-indent: 30px;">{{bouquet.description}}</p>
         </div>
 
-        <h3 class="txtCenter titleFont">FLOWER COMPOSITION: </h3>
+        <h3 class="txtCenter displaySCFront tbMargin20">СОСТАВ БУКЕТА: </h3>
 
-        <div *ngFor="let prodInBouq of bouquet.productsInBouquet">
-          <mat-grid-list cols="2" rowHeight="6:1" gutterSize="1%" style="margin: 2px auto">
-            <mat-grid-tile style="background: honeydew;">
+        <div *ngFor="let prodInBouq of bouquet.productsInBouquet" class="txtCenter" style="margin: 5px auto;">
+          <div style="display: flex;" class="wdth100">
+            <div class="wdth70" style="background: honeydew; padding: 3% 1%" >
               {{prodInBouq.product.name}}
-            </mat-grid-tile>
-            <mat-grid-tile style="background: honeydew;">
-              {{prodInBouq.amount}}
-            </mat-grid-tile>
-          </mat-grid-list>
+            </div>
+            <div style="width: 25%; background: honeydew; padding: 3% 3%; margin-left: 3%; vertical-align: middle">
+              {{prodInBouq.amount}}шт.
+            </div>
+          </div>
         </div>
 
-        <div style="display: flex">
+        <div class="tbMargin20" style="display: flex">
           <mat-form-field style="width: 50%;">
-            <mat-label class="titleFont">PRICE</mat-label>
+            <mat-label class="displaySCFront">ЦЕНА БУКЕТА:</mat-label>
             <input matInput disabled value="{{this.ProductsService.GetBouquetPrice(bouquetId)}}">
           </mat-form-field>
 
           <mat-form-field style="width: 49%;">
-            <mat-label>IN YOUR CART NOW: </mat-label>
+            <mat-label>СЕЙЧАС В ВАШЕЙ КОРЗИНЕ: </mat-label>
             <mat-select #fontSize value="{{amountInOrder}}" (selectionChange)="itemChanged($event.value)">
               <mat-option *ngFor='let i of makeArray(bouquet.in_stock)' value="{{i}}">{{i}}</mat-option>
             </mat-select>
@@ -49,6 +49,6 @@
     </div>
   </div>
   <ng-template #bouquetNotFoundError>
-    <h1 class="titleFont txtCenter">BOUQUET NOT FOUND</h1>
+    <h1 class="displaySCFront txtCenter">BOUQUET NOT FOUND</h1>
   </ng-template>
 </div>

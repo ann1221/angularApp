@@ -1,6 +1,6 @@
 <div class="tbMargin20 greyBg txtCenter">
-  <p class="title tbMargin20">Subscribe to <span class="redFont">Daily Newsletter</span></p>
-  <p class="subTitle tbMargin20">Where flowers are our inspiration to create lasting memories.</p>
+  <p class="title tbMargin20">Подписывайтесь на наши <span class="redFont">новости</span></p>
+  <p class="subTitle tbMargin20">Цветы &#8212; это вдохновение для создания прочных воспоминаний.</p>
 
   <form [formGroup]="emailReactiveForm">
     <mat-form-field style="width:25%">
@@ -8,7 +8,7 @@
       <input matInput id="email" formControlName="email"
              placeholder="Ex. pat@example.com">
     </mat-form-field>
-    <button mat-button (click)="onSubmit()">Subscribe</button>
+    <button id="button" mat-button (click)="onSubmit()">Подписаться</button>
   </form>
 </div>
 

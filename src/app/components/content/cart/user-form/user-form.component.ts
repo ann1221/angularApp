@@ -82,7 +82,7 @@ export class UserFormComponent implements OnInit {
     if (this.clientReactiveForm.invalid) {
       Object.keys(controls)
         .forEach(controlName => controls[controlName].markAsTouched());
-      this.orderService.openSnackBar('Пожалуйта, заполните все обязательные поля корректно', 'Ок');
+      this.orderService.openSnackBar('Пожалуйта, заполните все обязательные поля корректно', 'Ок', 3000);
       return;
     }
 
@@ -105,7 +105,14 @@ export class UserFormComponent implements OnInit {
     this.http.post('http://localhost:8080/addClientOrder', body,
       {headers: heads, params: parametrs}).subscribe( result => {
         console.log('received');
+        this.orderService.openSnackBar('Ваш заказ был принят, менеджер свяжется с Вами в ближайшие 2 часа',
+          'Ок', 10000);
+        this.orderService.CleanOrder();
+        this.orderService.SetCatalog();
     }, error => {
+        this.orderService.openSnackBar('Возникла ошибка сервера, возможно, часть товара была раскуплена',
+          'Ок', 10000);
+        this.orderService.SetCatalog();
         console.log('not received');
     });
   }

@@ -8,7 +8,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 
 export class OrderService {
-  CATALOG: Bouquet[];
+  private CATALOG: Bouquet[];
   constructor(public cookieService: CookieService, public http: HttpClient, private snackBar: MatSnackBar) {
     this.http.get<Bouquet[]>('http://localhost:8080/getCatalog').subscribe(result => {
       this.CATALOG = result; console.log(this.CATALOG); });
@@ -38,7 +38,7 @@ export class OrderService {
     const bouquet = this.GetBouquetById(bouquetId);
     let totalSum = 0;
     for (const prodInBouq of bouquet.productsInBouquet) {
-      totalSum += prodInBouq.product.price;
+      totalSum += prodInBouq.product.price * prodInBouq.amount;
     }
     return totalSum + bouquet.design_price;
   }
@@ -57,14 +57,18 @@ export class OrderService {
   }
 
   public getOrderLen(): number{
+    return this.getOrder().length;
+  }
+
+
+  public CleanOrder() {
     const map: { [key: string]: string} = this.cookieService.getAll();
-    let counter = 0;
     for (const mapKey in map) {
-      if (mapKey.split('/')[0] === 'bouq') {
-        counter++;
+      const key = mapKey.split('/');
+      if (key[0] === 'bouq') {
+        this.cookieService.delete(mapKey);
       }
     }
-    return counter;
   }
 
   public GetAmountOfBouquet(bouquetId: number): number {
@@ -84,14 +88,14 @@ export class OrderService {
           (Number(result) + 1).toString(),
           new Date(Date.now() + 86400e3) );
       } else {
-        this.openSnackBar('You already grabbed all this bouquet from stock..', 'okaay');
+        this.openSnackBar('Вы уже забрали все букеты, склад опустел', 'Ок', 3000);
       }
     } else {
       if (inStock > 0) {
         this.cookieService.set('bouq/' + bouquetId.toString(), '1',
           new Date(Date.now() + 86400e3));
       } else {
-        this.openSnackBar('Bouquet not found in stock', 'okaay');
+        this.openSnackBar('На данный момент букета нет на сладе', 'Ок', 3000);
       }
     }
   }
@@ -99,7 +103,7 @@ export class OrderService {
   public  SubstractFromOrder(bouquetId: number) {
     const result = this.cookieService.get('bouq/' + bouquetId.toString());
     if ( result.length === 0) {
-      this.openSnackBar('Nothing to substract', 'okaay');
+      this.openSnackBar('Увы, вычитать уже нечего', 'Ок', 3000);
     } else {
       if (Number(result) > 0) {
         this.cookieService.set('bouq/' + bouquetId.toString(),
@@ -109,10 +113,11 @@ export class OrderService {
           this.cookieService.delete('bouq/' + bouquetId.toString());
         }
       } else {
-        this.openSnackBar('Nothing to substract', 'okaay');
+        this.openSnackBar('Увы, вычитать уже нечего', 'Ок', 3000);
       }
     }
   }
+
 
   public SetAmountInOrder(bouquetId: number, value: number) {
     if (value <= 0){
@@ -125,13 +130,13 @@ export class OrderService {
         new Date(Date.now() + 86400e3));
     }
     else {
-      this.openSnackBar('You already grabbed all this bouquet from stock..', 'okaay');
+      this.openSnackBar('You already grabbed all this bouquet from stock..', 'okaay', 3000);
     }
   }
 
-  openSnackBar(message: string, action: string) {
+  openSnackBar(message: string, action: string, duration: number) {
     this.snackBar.open(message, action, {
-      duration: 3000,
+      duration,
     });
   }
 }

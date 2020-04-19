@@ -1,10 +1,10 @@
 <div class="minHeight wdth70 tbMargin20">
 
   <div *ngIf="this.orderService.getOrder().length > 0; else orderIsEmptyError">
-    <h2 class = "titleFont txtCenter">YOUR CART:</h2>
+    <h2 class = "displaySCFront txtCenter tbMargin20">ВАША КОРЗИНА:</h2>
     <div class="parent">
 
-      <div class="titleFont txtCenter cartTitles child" *ngFor="let title of titles">{{title}}</div>
+      <div class="displaySCFront txtCenter cartTitles child" *ngFor="let title of titles">{{title}}</div>
     </div>
 
     <app-cart-product *ngFor="let item of this.orderService.getOrder()"
@@ -12,12 +12,12 @@
                       [bouquet]="this.orderService.GetBouquetById(item.bouquet_id)"></app-cart-product>
 
     <hr class="redFont">
-    <h2 class="titleFont txtCenter"> TOTAL: {{GetToTalSum()}}</h2>
+    <h2 class="displaySCFront txtCenter">ИТОГО: {{GetToTalSum()}}</h2>
     <app-user-form></app-user-form>
   </div>
 
   <ng-template #orderIsEmptyError>
-    <h2 class = "titleFont txtCenter">YOUR CART IS EMPTY NOW...</h2>
+    <h2 class = "displaySCFront txtCenter">ВАША КОРЗИНА ПОКА ПУСТА...</h2>
   </ng-template>
 
 </div>

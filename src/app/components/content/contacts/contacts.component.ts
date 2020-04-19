@@ -12,7 +12,7 @@ export class ContactsComponent implements OnInit {
   constructor(private fb: FormBuilder, private orderService: OrderService) { }
 
   partImgPath = '../../../../assets/Contacts/';
-  endsOfPath: string[] = ['abUs1.jpg', 'abUs2.jpg', 'abUs3.jpg', 'abUs4.jpg', 'abUs5.jpg', 'abUs6.jpg'];
+  endsOfPath: string[] = ['abUs1_2_3.jpg', 'abUs2.jpg', 'abUs3.jpg', 'abUs4.jpg', 'abUs5.jpg', 'abUs6.jpg'];
 
   ngOnInit() {
     this.initForm();
@@ -20,7 +20,12 @@ export class ContactsComponent implements OnInit {
 
   initForm(){
     this.commentReactiveForm = this.fb.group({
-      name: ['',
+      fname: ['',
+        [
+          Validators.required,
+        ]
+      ],
+      sname: ['',
         [
           Validators.required,
         ]
@@ -38,7 +43,8 @@ export class ContactsComponent implements OnInit {
     if (this.commentReactiveForm.invalid) {
       Object.keys(controls)
         .forEach(controlName => controls[controlName].markAsTouched());
-      this.orderService.openSnackBar('Пожалуйта, введите обязательные поля корректно', 'Ок');
+      this.orderService.openSnackBar('Пожалуйта, введите обязательные поля корректно',
+        'Ок', 3000);
       return;
     }
     console.log(this.commentReactiveForm.value);

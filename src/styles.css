@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
@@ -43,10 +45,16 @@ body {
 .mintBg{
   background: honeydew;
 }
-.titleFont{
+
+.displaySCFront{
   font-family:  'Playfair Display SC', serif;
   font-weight: lighter;
 }
+
+.vibesFont{
+  font-family: 'Great Vibes', cursive;
+}
+
 .minHeight{
   min-height: 500px;
 }
@@ -68,6 +76,7 @@ body {
 button:active, button:focus {
   outline: none;
 }
+
 
 ::selection {background: rgba(255, 82, 72, 0.86); color:#fff;}
 ::-moz-selection {background: rgba(255, 82, 72, 0.86); color:#fff;}

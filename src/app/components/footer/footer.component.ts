@@ -39,10 +39,12 @@ export class FooterComponent implements OnInit {
     if (this.emailReactiveForm.invalid) {
       Object.keys(controls)
         .forEach(controlName => controls[controlName].markAsTouched());
-      this.orderService.openSnackBar('Пожалуйта, введите почту корректно', 'Ок');
+      this.orderService.openSnackBar('Пожалуйта, введите почту корректно', 'Ок', 3000);
       return;
     }
-    console.log(this.emailReactiveForm.value);
+    this.orderService.openSnackBar('Вы успешно подписались на нашу новостную рассылку',
+      'Ок', 3000);
+    this.initForm();
   }
 
 

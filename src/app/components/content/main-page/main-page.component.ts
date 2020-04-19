@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgbCarousel} from '@ng-bootstrap/ng-bootstrap';
 
 export interface SetMSH {
@@ -41,13 +41,11 @@ export class MainPageComponent implements OnInit {
     ];
 
 
-  constructor(private ngCarousel: NgbCarousel) {
-    ngCarousel.cycle();
-    ngCarousel.pauseOnHover = false;
+  constructor() {
   }
-
+  @ViewChild('carousel', {static : true}) carousel: NgbCarousel;
   ngOnInit() {
-    // this.pathToMainImg = '../../../assets/mainPage/MainFont1.jpg';
+
   }
 
 
@@ -55,11 +53,6 @@ export class MainPageComponent implements OnInit {
   OnClick() {
 
   }
-    // if (this.counter > 3) {
-    //   this.counter = 1;
-    // }
-    // this.pathToMainImg = '../../../assets/mainPage/MainFont' + this.counter + '.jpg';
-    // this.counter++;
-  // }
+
 }
 

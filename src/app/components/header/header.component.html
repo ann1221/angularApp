@@ -1,16 +1,17 @@
-<div class="tbMargin20 wdth80" style="display: flex;">
-  <h1 class="titleFont" style="cursor: pointer;" routerLink="/">
-    <span class="redFont">МАГА</span>ЗИН
+<div class="tbMargin20 wdth80" style="display: flex;" xmlns="http://www.w3.org/1999/html">
+  <span class="vibesFont" style="font-size: 30px;cursor: pointer;"> your</span>
+  <h1 class="displaySCFront" style="cursor: pointer;" routerLink="/">
+    <span class="redFont">BOU</span>QUET
   </h1>
   <div class="tbMargin20 right">
-    <button mat-button [matMenuTriggerFor]="menu" class="titleFont myfontSize">menu</button>
+    <button mat-button [matMenuTriggerFor]="menu" class="displaySCFront myfontSize">МЕНЮ</button>
     <mat-menu #menu="matMenu" >
-      <button mat-menu-item class="titleFont">item 1</button>
-      <button mat-menu-item class="titleFont">item 2</button>
+      <button mat-menu-item class="displaySCFront">item 1</button>
+      <button mat-menu-item class="displaySCFront">item 2</button>
     </mat-menu>
-    <button mat-button class="titleFont myfontSize" routerLink="/catalog">catalog</button>
-    <button mat-button class="titleFont myfontSize" routerLink="/contacts">about us</button>
-    <button mat-button class="titleFont myfontSize" routerLink="/cart">
+    <button mat-button class="displaySCFront myfontSize" routerLink="/catalog">КАТАЛОГ</button>
+    <button mat-button class="displaySCFront myfontSize" routerLink="/contacts">КОНТАКТЫ</button>
+    <button mat-button class="displaySCFront myfontSize" routerLink="/cart">
             <span *ngIf="this.ProductsService.getOrderLen() > 0">
               <mat-icon matBadge="{{this.ProductsService.getOrderLen()}}" matBadgePosition="after" matBadgeColor="warn">
                 shopping_cart
