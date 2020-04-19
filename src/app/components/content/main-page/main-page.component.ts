@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {NgbCarousel} from '@ng-bootstrap/ng-bootstrap';
 
 export interface SetMSH {
   title: string;
@@ -13,8 +14,14 @@ export interface SetMSH {
 })
 
 export class MainPageComponent implements OnInit {
-  pathToMainImg: string;
   counter = 2;
+
+  pathToMainImg: string[] =
+    [
+      '../../../assets/mainPage/MainFont1.jpg',
+      '../../../assets/mainPage/MainFont2.jpg',
+      '../../../assets/mainPage/MainFont3.jpg'
+    ];
 
   topImg: string[] = ['top1.jpg', 'top2.jpg', 'top3.jpg', 'top4.jpg', 'top5.jpg', 'top6.jpg'];
 
@@ -34,21 +41,25 @@ export class MainPageComponent implements OnInit {
     ];
 
 
-  constructor() {
+  constructor(private ngCarousel: NgbCarousel) {
+    ngCarousel.cycle();
+    ngCarousel.pauseOnHover = false;
   }
 
   ngOnInit() {
-    this.pathToMainImg = '../../../assets/mainPage/MainFont1.jpg';
+    // this.pathToMainImg = '../../../assets/mainPage/MainFont1.jpg';
   }
 
 
 
   OnClick() {
-    if (this.counter > 3) {
-      this.counter = 1;
-    }
-    this.pathToMainImg = '../../../assets/mainPage/MainFont' + this.counter + '.jpg';
-    this.counter++;
+
   }
+    // if (this.counter > 3) {
+    //   this.counter = 1;
+    // }
+    // this.pathToMainImg = '../../../assets/mainPage/MainFont' + this.counter + '.jpg';
+    // this.counter++;
+  // }
 }
 

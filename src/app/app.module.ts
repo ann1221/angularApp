@@ -33,6 +33,7 @@ import {CookieService} from 'ngx-cookie-service';
 import {MatListModule} from '@angular/material/list';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {NgbCarousel, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -66,8 +67,9 @@ import {MatSnackBar} from '@angular/material/snack-bar';
     MatBadgeModule,
     MatCardModule,
     MatSelectModule,
+    NgbModule
   ],
-  providers: [OrderService, HttpClientModule, CookieService, MatSnackBar],
+  providers: [OrderService, HttpClientModule, CookieService, MatSnackBar, NgbCarousel],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
