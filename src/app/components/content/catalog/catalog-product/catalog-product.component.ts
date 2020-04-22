@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Bouquet, OrderService} from '../../../../order.service';
+import {DBService} from '../../../../services/d-b.service';
+import {Bouquet} from '../../../../classes/Bouquet';
+import {CookieServiceService} from '../../../../services/cookie-service.service';
 
 
 @Component({
@@ -8,7 +10,7 @@ import {Bouquet, OrderService} from '../../../../order.service';
   styleUrls: ['./catalog-product.component.css']
 })
 export class CatalogProductComponent implements OnInit {
-  constructor(public orderService: OrderService) {
+  constructor(public dbService: DBService, public cookieService: CookieServiceService) {
   }
 
   @Input() bouquet: Bouquet;
@@ -16,15 +18,14 @@ export class CatalogProductComponent implements OnInit {
   }
 
   AddToCart() {
-    this.orderService.AddToOrder(this.bouquet.bouquet_id);
+    this.cookieService.addToOrder(this.bouquet);
   }
 
   DropFromCart() {
-    this.orderService.SubstractFromOrder(this.bouquet.bouquet_id);
+    this.cookieService.substractFromOrder(this.bouquet.bouquet_id);
   }
 
-  GetAmountInOrder(): number {
-    return this.orderService.GetAmountOfBouquet(this.bouquet.bouquet_id);
+  getAmountInOrder(): number {
+    return this.cookieService.getAmountOfBouquet(this.bouquet.bouquet_id);
   }
-
 }

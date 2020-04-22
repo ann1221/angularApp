@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" [ngStyle]="bouquet.in_stock == 0? {'background':'#fadadd'}: {'background':'white'}">
 
   <div id="header">
     <p>{{bouquet.name}}</p>
@@ -13,10 +13,15 @@
            cursor: pointer;">
   </div>
 
-  <div id="footer" style="display: flex;">
-    <button (click) = "AddToCart()">+</button>
-    <button (click) = "DropFromCart()">-</button>
-    <input type="text" disabled placeholder="{{this.GetAmountInOrder()}}">
+  <div id="footer1" *ngIf="bouquet.in_stock>0" style="display: flex;">
+    <button class="inStock" (click) = "AddToCart()">+</button>
+    <button class="inStock" (click) = "DropFromCart()">-</button>
+    <input class="inStock" type="text" disabled placeholder="{{this.getAmountInOrder()}}">
+  </div>
+  <div id="footer2" *ngIf="bouquet.in_stock<=0" style="display: flex;">
+    <button class="notInStock" (click) = "AddToCart()">+</button>
+    <button class="notInStock" (click) = "DropFromCart()">-</button>
+    <input class="notInStock" type="text" disabled placeholder="{{this.getAmountInOrder()}}">
   </div>
 </div>
 

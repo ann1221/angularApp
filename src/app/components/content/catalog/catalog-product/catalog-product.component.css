@@ -11,25 +11,46 @@ p{
   padding: 2px;
   margin: 2px;
 }
+
 button{
+   width: 23%;
+   margin: 1%;
+   padding: 2%;
+   border: 0;
+   font-size: 20px;
+ }
+
+button.inStock{
   background: white;
-  width: 23%;
-  margin: 1%;
-  padding: 2%;
-  border: 0;
-  font-size: 20px;
+}
+
+button.notInStock{
+  background: #fadadd;
+}
+
+button.inStock:hover{
+   background: #f3f3f3;
+   border-radius: 5px;
+   cursor: pointer;
+}
+
+button.notInStock:hover{
+  background: #DDADAF;
+  border-radius: 5px;
   cursor: pointer;
 }
-button:hover{
-  background: #f3f3f3;
-  border-radius: 5px;
-}
+
 input{
   width: 33%;
   margin: 10px 0 10px auto;
   padding: 3px 7px 3px 7px;
-  background: white;
   border: 1px solid lightgray;
   border-radius: 10px;
   text-align: center;
+}
+input.inStock{
+  background: white;
+}
+input.notInStock{
+  background: #FFF0F5;
 }

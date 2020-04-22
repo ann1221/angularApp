@@ -12,12 +12,12 @@
     <button mat-button class="displaySCFront myfontSize" routerLink="/catalog">КАТАЛОГ</button>
     <button mat-button class="displaySCFront myfontSize" routerLink="/contacts">КОНТАКТЫ</button>
     <button mat-button class="displaySCFront myfontSize" routerLink="/cart">
-            <span *ngIf="this.ProductsService.getOrderLen() > 0">
-              <mat-icon matBadge="{{this.ProductsService.getOrderLen()}}" matBadgePosition="after" matBadgeColor="warn">
+            <span *ngIf="getCountOfBouquet() > 0">
+              <mat-icon matBadge="{{getCountOfBouquet()}}" matBadgePosition="after" matBadgeColor="warn">
                 shopping_cart
               </mat-icon>
             </span>
-      <span *ngIf="this.ProductsService.getOrderLen() === 0">
+      <span *ngIf="getCountOfBouquet() === 0">
               <mat-icon>
                 shopping_cart
               </mat-icon>

@@ -39,6 +39,9 @@ body {
 .redFont{
   color: red;
 }
+.purpleFont{
+  color: #800080;
+}
 .greyBg{
   background: #f3f3f3;
 }

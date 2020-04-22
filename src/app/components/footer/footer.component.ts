@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
-import {OrderService} from '../../order.service';
+import {DBService} from '../../services/d-b.service';
 
 @Component({
   selector: 'app-footer',
@@ -10,7 +10,7 @@ import {OrderService} from '../../order.service';
 })
 export class FooterComponent implements OnInit {
   emailReactiveForm: FormGroup;
-  constructor(private fb: FormBuilder, private orderService: OrderService) {}
+  constructor(private fb: FormBuilder, private orderService: DBService) {}
 
   ngOnInit() {
     this.initForm();

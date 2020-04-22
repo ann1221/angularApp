@@ -6,7 +6,7 @@
        *ngFor="let i of [bouquet.name,
                   bouquet.description,
                   orderUnit.amount,
-                  this.orderService.GetBouquetPrice(bouquet.bouquet_id)]">
+                  this.getBouquetPrice(bouquet)]">
     <p style="font-size: 25px;">{{i}}</p>
   </div>
 </div>

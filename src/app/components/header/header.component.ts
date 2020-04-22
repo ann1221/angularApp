@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {OrderService} from '../../order.service';
+import {DBService} from '../../services/d-b.service';
+import {CookieServiceService} from '../../services/cookie-service.service';
 
 @Component({
   selector: 'app-header',
@@ -8,9 +9,13 @@ import {OrderService} from '../../order.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(public ProductsService: OrderService) { }
+  constructor(public cookieService: CookieServiceService) { }
 
   ngOnInit(): void {
+  }
+
+  getCountOfBouquet(){
+    return this.cookieService.getBouqutCountInOrder();
   }
 
 }

@@ -1,15 +1,15 @@
 <div class="minHeight wdth70 tbMargin20">
 
-  <div *ngIf="this.orderService.getOrder().length > 0; else orderIsEmptyError">
+  <div *ngIf="this.cookieService.getBouqutCountInOrder()> 0; else orderIsEmptyError">
     <h2 class = "displaySCFront txtCenter tbMargin20">ВАША КОРЗИНА:</h2>
     <div class="parent">
 
       <div class="displaySCFront txtCenter cartTitles child" *ngFor="let title of titles">{{title}}</div>
     </div>
 
-    <app-cart-product *ngFor="let item of this.orderService.getOrder()"
+    <app-cart-product *ngFor="let item of this.order"
                       [orderUnit]="item"
-                      [bouquet]="this.orderService.GetBouquetById(item.bouquet_id)"></app-cart-product>
+                      [bouquet]="this.getBouquetById(item.bouquet_id)"></app-cart-product>
 
     <hr class="redFont">
     <h2 class="displaySCFront txtCenter">ИТОГО: {{GetToTalSum()}}</h2>

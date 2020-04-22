@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {OrderService} from '../../../order.service';
+import {DBService} from '../../../services/d-b.service';
 
 @Component({
   selector: 'app-contacts',
@@ -9,7 +9,7 @@ import {OrderService} from '../../../order.service';
 })
 export class ContactsComponent implements OnInit {
   commentReactiveForm: FormGroup;
-  constructor(private fb: FormBuilder, private orderService: OrderService) { }
+  constructor(private fb: FormBuilder, private orderService: DBService) { }
 
   partImgPath = '../../../../assets/Contacts/';
   endsOfPath: string[] = ['abUs1_2_3.jpg', 'abUs2.jpg', 'abUs3.jpg', 'abUs4.jpg', 'abUs5.jpg', 'abUs6.jpg'];

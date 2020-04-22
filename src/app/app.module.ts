@@ -28,12 +28,13 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatCardModule} from '@angular/material/card';
 
-import {OrderService} from './order.service';
+import {DBService} from './services/d-b.service';
 import {CookieService} from 'ngx-cookie-service';
 import {MatListModule} from '@angular/material/list';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {NgbCarousel, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -67,9 +68,10 @@ import {NgbCarousel, NgbModule} from '@ng-bootstrap/ng-bootstrap';
     MatBadgeModule,
     MatCardModule,
     MatSelectModule,
-    NgbModule
+    NgbModule,
+    MatPaginatorModule
   ],
-  providers: [OrderService, HttpClientModule, CookieService, MatSnackBar, NgbCarousel],
+  providers: [DBService, HttpClientModule, CookieService, MatSnackBar, NgbCarousel],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

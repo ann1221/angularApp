@@ -1,18 +1,43 @@
-import {Component, OnInit, Output} from '@angular/core';
-import {Bouquet, OrderService} from '../../../order.service';
-import {HttpClient} from '@angular/common/http';
-import {CookieService} from 'ngx-cookie-service';
+import {AfterContentInit, AfterViewInit, Component, OnInit, Output} from '@angular/core';
+import {DBService} from '../../../services/d-b.service';
+import {Bouquet} from '../../../classes/Bouquet';
 
 @Component({
   selector: 'app-catalog',
   templateUrl: './catalog.component.html',
   styleUrls: ['./catalog.component.css']
 })
-export class CatalogComponent implements OnInit {
+export class CatalogComponent implements OnInit{
 
-  constructor(public orderService: OrderService) {
+  constructor(public dbService: DBService) {
   }
 
-  ngOnInit() {  }
+  titles: string[] = ['ВСЕ', 'ТЮЛЬПАН', 'РОЗА', 'ХРИЗАНТЕМА', 'АЛЬСТРОМЕРИЯ'];
+  curTitle = this.titles[0];
+
+  page = 1;
+  capacity = 12;
+  localCatalog: Bouquet[] = [];
+
+  ngOnInit() { this.initLocalCatalog(); }
+
+  initLocalCatalog(){
+    if (this.curTitle === this.titles[0]){
+      this.dbService.getCatalogSlice(this.page, this.capacity).subscribe(result => {
+        console.log(result);
+        this.localCatalog = result;
+      }, error => {
+        console.log('server error was occured');
+      });
+      return;
+    }
+
+    this.dbService.getCatalogByProdName(this.curTitle).subscribe(result => {
+      console.log(result);
+      this.localCatalog = result;
+    }, error => {
+      console.log('server error was occured');
+    });
+  }
 }
 

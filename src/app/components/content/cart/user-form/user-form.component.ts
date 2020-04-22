@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {OrderService} from '../../../../order.service';
+import {DBService} from '../../../../services/d-b.service';
+import {Client} from '../../../../classes/Client';
+import {CookieServiceService} from '../../../../services/cookie-service.service';
 
 @Component({
   selector: 'app-user-form',
@@ -11,7 +13,8 @@ import {OrderService} from '../../../../order.service';
 })
 export class UserFormComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private orderService: OrderService) { }
+  constructor(private fb: FormBuilder, private dbService: DBService,
+              private cookieService: CookieServiceService) { }
 
   clientReactiveForm: FormGroup;
 
@@ -77,15 +80,15 @@ export class UserFormComponent implements OnInit {
       ],
     });
   }
+
   onSubmit() {
     const controls = this.clientReactiveForm.controls;
     if (this.clientReactiveForm.invalid) {
       Object.keys(controls)
         .forEach(controlName => controls[controlName].markAsTouched());
-      this.orderService.openSnackBar('Пожалуйта, заполните все обязательные поля корректно', 'Ок', 3000);
+      this.dbService.openSnackBar('Пожалуйта, заполните все обязательные поля корректно', 'Ок', 3000);
       return;
     }
-
     console.log(this.clientReactiveForm.value);
 
     const client: Client = {
@@ -102,24 +105,22 @@ export class UserFormComponent implements OnInit {
     const body = JSON.stringify(client);
     const parametrs = new HttpParams().set('bouquetList', JSON.stringify(this.GetOrder()));
 
-    this.http.post('http://localhost:8080/addClientOrder', body,
-      {headers: heads, params: parametrs}).subscribe( result => {
+    this.dbService.addClietnOrder(heads, body, parametrs).subscribe( result => {
         console.log('received');
-        this.orderService.openSnackBar('Ваш заказ был принят, менеджер свяжется с Вами в ближайшие 2 часа',
+        this.dbService.openSnackBar('Ваш заказ был принят, менеджер свяжется с Вами в ближайшее время',
           'Ок', 10000);
-        this.orderService.CleanOrder();
-        this.orderService.SetCatalog();
+        this.cookieService.cleanOrder();
     }, error => {
-        this.orderService.openSnackBar('Возникла ошибка сервера, возможно, часть товара была раскуплена',
+        this.dbService.openSnackBar('Возникла ошибка сервера, возможно, часть товара была раскуплена',
           'Ок', 10000);
-        this.orderService.SetCatalog();
+        this.dbService.SetCatalog();
         console.log('not received');
     });
   }
 
   GetOrder(){
     const map: { [key: string]: string} = {};
-    for (const orderUnit of this.orderService.getOrder()) {
+    for (const orderUnit of this.cookieService.buildOrder()) {
       map[orderUnit.bouquet_id.toString()] = orderUnit.amount.toString();
     }
     return map;
@@ -134,11 +135,4 @@ export class UserFormComponent implements OnInit {
   }
 }
 
-export interface Client {
-  fname: string;
-  sname: string;
-  lname: string;
-  phone_number: string;
-  email: string;
-  address: string;
-}
+

@@ -1,4 +1,16 @@
 <div class="minHeight wdth70 tbMargin20 grayScale">
   <h2 class = "displaySCFront txtCenter tbMargin20">НАШ КАТАЛОГ:</h2>
-  <app-catalog-product *ngFor="let item of this.orderService.GetCatalog()" [bouquet]="item"></app-catalog-product>
+  <ul ngbNav #nav="ngbNav" destroyOnHide
+      [(activeId)]="curTitle" (activeIdChange)="initLocalCatalog()"
+      class="nav-tabs" >
+    <div *ngFor="let i of titles;">
+      <li ngbNavItem="{{i}}">
+        <a ngbNavLink class="displaySCFront purpleFont">{{i}}</a>
+        <ng-template  ngbNavContent>
+        </ng-template>
+      </li>
+    </div>
+  </ul>
+  <div [ngbNavOutlet]="nav" class="mt-2"></div>
+  <app-catalog-product *ngFor="let item of localCatalog" [bouquet]="item"></app-catalog-product>
 </div>
