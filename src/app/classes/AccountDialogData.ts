@@ -1,4 +1,6 @@
-export interface DialogData {
-  login: string;
-  password: string;
+import {Client} from './Client';
+
+export interface AccountDialogData {
+  client: Client;
+  isSigningUp: boolean;
 }

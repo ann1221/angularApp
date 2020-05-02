@@ -1,10 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div *ngIf="data.isSigningUp">
+  <form [formGroup]="clientReactiveForm">
+    <h3>Пожалуйта, заполните форму регистрации:</h3>
+    <mat-form-field class="wdth100">
+      <mat-label for="fname">Фамилия</mat-label>
+      <input matInput id="fname" formControlName="fname">
+    </mat-form-field>
+    <mat-form-field class="wdth100">
+      <mat-label for="sname">Имя</mat-label>
+      <input matInput id="sname" formControlName="sname">
+    </mat-form-field>
+    <mat-form-field class="wdth100">
+      <mat-label for="email">Email</mat-label>
+      <input matInput id="email" formControlName="email">
+    </mat-form-field>
+    <mat-form-field class="wdth100">
+      <mat-label for="password">Пароль</mat-label>
+      <input matInput id="password" formControlName="password">
+    </mat-form-field>
 
-</body>
-</html>
+    <div mat-dialog-actions>
+      <button mat-button (click)="onNoClick()">No Thanks</button>
+      <button mat-button (click)="onYesClick()" cdkFocusInitial>Ok</button>
+    </div>
+  </form>
+</div>
+<div *ngIf="!data.isSigningUp">
+  <form [formGroup]="clientReactiveForm">
+    <mat-form-field class="wdth100">
+      <mat-label for="email2">Email</mat-label>
+      <input matInput id="email2" formControlName="email">
+    </mat-form-field>
+    <mat-form-field class="wdth100">
+      <mat-label for="password2">Пароль</mat-label>
+      <input matInput id="password2" formControlName="password">
+    </mat-form-field>
+    <div mat-dialog-actions>
+      <button mat-button (click)="onNoClick()">No Thanks</button>
+      <button mat-button (click)="onYesClick()" cdkFocusInitial>Ok</button>
+    </div>
+  </form>
+</div>
+
+

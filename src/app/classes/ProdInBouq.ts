@@ -1,6 +1,6 @@
 import {Product} from './Product';
 
-export interface ProdInBouquet {
+export interface ProdInBouq {
   product: Product;
   amount: number;
 }

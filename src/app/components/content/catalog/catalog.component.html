@@ -1,11 +1,11 @@
 <div class="minHeight wdth70 tbMargin20 grayScale">
-  <h2 class = "displaySCFront txtCenter tbMargin20">НАШ КАТАЛОГ:</h2>
+  <h2 class = "playfairFontStyle txtCenter tbMargin20">НАШ КАТАЛОГ:</h2>
   <ul ngbNav #nav="ngbNav" destroyOnHide
       [(activeId)]="curTitle" (activeIdChange)="initLocalCatalog()"
       class="nav-tabs" >
     <div *ngFor="let i of titles;">
       <li ngbNavItem="{{i}}">
-        <a ngbNavLink class="displaySCFront purpleFont">{{i}}</a>
+        <a ngbNavLink class="playfairFontStyle redFont">{{i}}</a>
         <ng-template  ngbNavContent>
         </ng-template>
       </li>

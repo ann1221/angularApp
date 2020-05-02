@@ -1,17 +1,18 @@
 <div class="tbMargin20 wdth80" style="display: flex;" xmlns="http://www.w3.org/1999/html">
-  <span class="vibesFont" style="font-size: 30px;cursor: pointer;"> your</span>
-  <h1 class="displaySCFront" style="cursor: pointer;" routerLink="/">
+  <span class="vibesFontStyle" style="font-size: 30px;cursor: pointer;"> your</span>
+  <h1 class="playfairFontStyle" style="cursor: pointer;" routerLink="/">
     <span class="redFont">BOU</span>QUET
   </h1>
   <div class="tbMargin20 right">
-    <button mat-button [matMenuTriggerFor]="menu" class="displaySCFront myfontSize">МЕНЮ</button>
+    <button mat-button [matMenuTriggerFor]="menu" class="playfairFontStyle myfontSize">МЕНЮ</button>
     <mat-menu #menu="matMenu" >
-      <button mat-menu-item class="displaySCFront">item 1</button>
-      <button mat-menu-item class="displaySCFront">item 2</button>
+      <button mat-menu-item class="playfairFontStyle">item 1</button>
+      <button mat-menu-item class="playfairFontStyle">item 2</button>
     </mat-menu>
-    <button mat-button class="displaySCFront myfontSize" routerLink="/catalog">КАТАЛОГ</button>
-    <button mat-button class="displaySCFront myfontSize" routerLink="/contacts">КОНТАКТЫ</button>
-    <button mat-button class="displaySCFront myfontSize" routerLink="/cart">
+    <button mat-button class="playfairFontStyle" routerLink="/catalog">КАТАЛОГ</button>
+    <button mat-button class="playfairFontStyle" routerLink="/contacts">КОНТАКТЫ</button>
+    <button mat-button color="warn" class="playfairFontStyle" routerLink="/account">МОЙ КАБИНЕТ</button>
+    <button mat-button class="playfairFontStyle" routerLink="/cart">
             <span *ngIf="getCountOfBouquet() > 0">
               <mat-icon matBadge="{{getCountOfBouquet()}}" matBadgePosition="after" matBadgeColor="warn">
                 shopping_cart

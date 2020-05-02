@@ -47,7 +47,7 @@ export class UserFormComponent implements OnInit {
         [
           Validators.required,
           Validators.minLength(5),
-          Validators.maxLength(10),
+          Validators.maxLength(11),
           Validators.pattern(justNumbersPattern)
         ]
       ],
@@ -95,7 +95,7 @@ export class UserFormComponent implements OnInit {
       fname: controls.fname.value,
       sname: controls.sname.value,
       lname: controls.lname.value,
-      phone_number: controls.phone.value,
+      phone: controls.phone.value,
       address: controls.state.value.trim() + ';' + controls.city.value.trim() +
         ';' + controls.postalCode.value.trim() + ';' + controls.address.value.trim(),
       email: controls.email.value.trim()
@@ -105,7 +105,7 @@ export class UserFormComponent implements OnInit {
     const body = JSON.stringify(client);
     const parametrs = new HttpParams().set('bouquetList', JSON.stringify(this.GetOrder()));
 
-    this.dbService.addClietnOrder(heads, body, parametrs).subscribe( result => {
+    this.dbService.addClientOrder(heads, body, parametrs).subscribe(result => {
         console.log('received');
         this.dbService.openSnackBar('Ваш заказ был принят, менеджер свяжется с Вами в ближайшее время',
           'Ок', 10000);
@@ -113,7 +113,7 @@ export class UserFormComponent implements OnInit {
     }, error => {
         this.dbService.openSnackBar('Возникла ошибка сервера, возможно, часть товара была раскуплена',
           'Ок', 10000);
-        this.dbService.SetCatalog();
+        // this.dbService.SetCatalog();
         console.log('not received');
     });
   }
@@ -121,7 +121,7 @@ export class UserFormComponent implements OnInit {
   GetOrder(){
     const map: { [key: string]: string} = {};
     for (const orderUnit of this.cookieService.buildOrder()) {
-      map[orderUnit.bouquet_id.toString()] = orderUnit.amount.toString();
+      map[orderUnit.bouquetId.toString()] = orderUnit.amount.toString();
     }
     return map;
   }

@@ -44,7 +44,7 @@ export class ProdInfoComponent implements OnInit {
     for (const prodInBouq of this.bouquet.productsInBouquet) {
       totalSum += prodInBouq.product.price * prodInBouq.amount;
     }
-    return totalSum + this.bouquet.design_price;
+    return totalSum + this.bouquet.designPrice;
   }
 
 }

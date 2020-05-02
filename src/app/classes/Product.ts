@@ -1,11 +1,11 @@
 export interface Product {
-  prod_id: number;
+  prodId: number;
   name: string;
   price: number;
-  productType: ProductType;
+  prodType: ProductType;
 }
 
 export interface ProductType {
-  type_id: number;
+  typeId: number;
   name: string;
 }

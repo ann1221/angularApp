@@ -1,5 +1,5 @@
 <div class="wdth70 tbMargin20 mintBg" style="padding: 2%; border: 5px double lightgray;">
-  <p class="txtCenter displaySCFront" style="font-size: 30px;"> Оформление заказа: </p>
+  <p class="txtCenter playfairFontStyle" style="font-size: 30px;"> Оформление заказа: </p>
   <div class="wdth70" style="margin: auto;">
     <form [formGroup]="clientReactiveForm">
       <mat-form-field style="width: 100%;">
@@ -44,12 +44,12 @@
       <p>
         <mat-form-field style="width: 100%;">
           <mat-label for="phone">Телефон</mat-label>
-          <span matPrefix>+7 &nbsp;</span>
+          <span matPrefix>+ &nbsp;</span>
           <input type="tel" matInput placeholder="8005553535"
                  id="phone" formControlName="phone">
           <mat-icon matSuffix>mode_edit</mat-icon>
           <mat-hint align="end">
-            {{clientReactiveForm.controls['phone'].value.toString().length}} / 10
+            {{clientReactiveForm.controls['phone'].value.toString().length}} / 11
           </mat-hint>
           <mat-error *ngIf="isControlInvalid('phone')">
             Invalid phone<strong></strong>

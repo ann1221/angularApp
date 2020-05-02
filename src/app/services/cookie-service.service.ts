@@ -17,7 +17,7 @@ export class CookieServiceService {
     for (const mapKey in map) {
       const key = mapKey.split('/');
       if (key[0] === 'bouq') {
-        const orderUnit: OrderUnit = {bouquet_id: Number(key[1]), amount: Number(map[mapKey])};
+        const orderUnit: OrderUnit = {bouquetId: Number(key[1]), amount: Number(map[mapKey])};
         order.push(orderUnit);
       }
     }
@@ -39,11 +39,11 @@ export class CookieServiceService {
   }
 
   public addToOrder(bouquet: Bouquet) {
-    const result = this.cookieService.get('bouq/' + bouquet.bouquet_id.toString());
+    const result = this.cookieService.get('bouq/' + bouquet.bouquetId.toString());
     const inStock = bouquet.in_stock;
     if (result.length > 0){
       if (inStock > Number(result)) {
-        this.cookieService.set('bouq/' + bouquet.bouquet_id.toString(),
+        this.cookieService.set('bouq/' + bouquet.bouquetId.toString(),
           (Number(result) + 1).toString(),
           new Date(Date.now() + 86400e3) );
       } else {
@@ -51,7 +51,7 @@ export class CookieServiceService {
       }
     } else {
       if (inStock > 0) {
-        this.cookieService.set('bouq/' + bouquet.bouquet_id.toString(), '1',
+        this.cookieService.set('bouq/' + bouquet.bouquetId.toString(), '1',
           new Date(Date.now() + 86400e3));
       } else {
         this.openSnackBar('На данный момент букета нет на сладе', 'Ок', 3000);
@@ -79,12 +79,12 @@ export class CookieServiceService {
 
   public setAmountInOrder(bouquet: Bouquet, value: number) {
     if (value <= 0){
-      this.cookieService.delete('bouq/' + bouquet.bouquet_id.toString());
+      this.cookieService.delete('bouq/' + bouquet.bouquetId.toString());
       console.log('asdfadfa');
       return;
     }
     if (bouquet.in_stock >= value) {
-      this.cookieService.set('bouq/' + bouquet.bouquet_id.toString(), value.toString(),
+      this.cookieService.set('bouq/' + bouquet.bouquetId.toString(), value.toString(),
         new Date(Date.now() + 86400e3));
     }
     else {

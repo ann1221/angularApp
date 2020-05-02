@@ -38,7 +38,7 @@ export class CartComponent implements OnInit, AfterContentInit {
       console.log(this.order);
       const ids: number[] = [];
       for (const orderUnit of this.order) {
-        ids.push(orderUnit.bouquet_id);
+        ids.push(orderUnit.bouquetId);
       }
       this.dbService.getCatalogByIds(ids).subscribe(result => {
         this.localCatalog = result;
@@ -50,14 +50,14 @@ export class CartComponent implements OnInit, AfterContentInit {
   GetToTalSum(): number {
     let total = 0;
     for (const orderUnit of this.order) {
-      total += this.getBouquetPrice(this.getBouquetById(orderUnit.bouquet_id)) * orderUnit.amount;
+      total += this.getBouquetPrice(this.getBouquetById(orderUnit.bouquetId)) * orderUnit.amount;
     }
     return total;
   }
 
   public getBouquetById(bouquetId: number): Bouquet {
     for (const bouquet of this.localCatalog) {
-      if (bouquet.bouquet_id.toString() === bouquetId.toString()) {
+      if (bouquet.bouquetId.toString() === bouquetId.toString()) {
         return (bouquet);
       }
     }
@@ -69,7 +69,7 @@ export class CartComponent implements OnInit, AfterContentInit {
     for (const prodInBouq of bouquet.productsInBouquet) {
       totalSum += prodInBouq.product.price * prodInBouq.amount;
     }
-    return totalSum + bouquet.design_price;
+    return totalSum + bouquet.designPrice;
   }
 
 }

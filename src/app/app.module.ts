@@ -15,6 +15,7 @@ import { CatalogProductComponent } from './components/content/catalog/catalog-pr
 import { ProdInfoComponent } from './components/content/catalog/catalog-product/prod-info/prod-info.component';
 import { ContactsComponent } from './components/content/contacts/contacts.component';
 import { MainPageComponent } from './components/content/main-page/main-page.component';
+import {PersonalAccountDialogComponent} from './components/content/personal-account/personal-account.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -35,6 +36,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {NgbCarousel, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { PersonalAccountComponent } from './components/content/personal-account/personal-account.component';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -48,7 +51,9 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     CatalogProductComponent,
     ProdInfoComponent,
     ContactsComponent,
-    MainPageComponent
+    MainPageComponent,
+    PersonalAccountComponent,
+    PersonalAccountDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +66,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatListModule,
     MatFormFieldModule,
     MatMenuModule,
+    MatDialogModule,
     MatButtonModule,
     MatGridListModule,
     MatInputModule,
@@ -69,9 +75,14 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatCardModule,
     MatSelectModule,
     NgbModule,
-    MatPaginatorModule
+    MatPaginatorModule,
   ],
-  providers: [DBService, HttpClientModule, CookieService, MatSnackBar, NgbCarousel],
+  providers: [DBService,
+    HttpClientModule,
+    CookieService, MatSnackBar,
+    NgbCarousel,
+    MatDialog
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -3,14 +3,14 @@
 
     <div id="header" class="tbMargin20">
       <hr>
-      <h1 class="txtCenter displaySCFront">{{bouquet.name}}</h1>
+      <h1 class="txtCenter playfairFontStyle">{{bouquet.name}}</h1>
       <hr>
     </div>
 
     <div id="body" class="wdth100" style="display: flex;">
 
       <div class="wdth50">
-        <img src="{{this.bouquet.pict_url}}" width="100%">
+        <img src="{{this.bouquet.pictUrl}}" width="100%">
       </div>
 
       <div class="wdth50" style="margin-left: 3%;">
@@ -19,7 +19,7 @@
           <p style="text-align: justify; text-indent: 30px;">{{bouquet.description}}</p>
         </div>
 
-        <h3 class="txtCenter displaySCFront tbMargin20">СОСТАВ БУКЕТА: </h3>
+        <h3 class="txtCenter playfairFontStyle tbMargin20">СОСТАВ БУКЕТА: </h3>
 
         <div *ngFor="let prodInBouq of bouquet.productsInBouquet" class="txtCenter" style="margin: 5px auto;">
           <div style="display: flex;" class="wdth100">
@@ -34,7 +34,7 @@
 
         <div class="tbMargin20" style="display: flex">
           <mat-form-field style="width: 50%;">
-            <mat-label class="displaySCFront">ЦЕНА БУКЕТА:</mat-label>
+            <mat-label class="playfairFontStyle">ЦЕНА БУКЕТА:</mat-label>
             <input matInput disabled value="{{this.getBouquetPrice()}}">
           </mat-form-field>
 
@@ -49,6 +49,6 @@
     </div>
   </div>
   <ng-template #bouquetNotFoundError>
-    <h1 class="displaySCFront txtCenter">BOUQUET NOT FOUND</h1>
+    <h1 class="playfairFontStyle txtCenter">BOUQUET NOT FOUND</h1>
   </ng-template>
 </div>

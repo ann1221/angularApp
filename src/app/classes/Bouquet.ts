@@ -1,11 +1,11 @@
-import {ProdInBouquet} from './ProductInBouquet';
+import {ProdInBouq} from './ProdInBouq';
 
 export interface Bouquet {
-  bouquet_id: number;
+  bouquetId: number;
   name: string;
-  design_price: number;
-  pict_url: string;
+  designPrice: number;
+  pictUrl: string;
   description: string;
-  productsInBouquet: ProdInBouquet[];
+  productsInBouquet: ProdInBouq[];
   in_stock: number;
 }

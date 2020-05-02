@@ -1,4 +1,4 @@
 export interface OrderUnit {
-  bouquet_id: number;
+  bouquetId: number;
   amount: number;
 }

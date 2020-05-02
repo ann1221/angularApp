@@ -25,6 +25,6 @@ export class CartProductComponent implements OnInit {
     for (const prodInBouq of bouquet.productsInBouquet) {
       totalSum += prodInBouq.product.price * prodInBouq.amount;
     }
-    return totalSum + bouquet.design_price;
+    return totalSum + bouquet.designPrice;
   }
 }

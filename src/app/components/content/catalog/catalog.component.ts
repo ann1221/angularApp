@@ -15,7 +15,7 @@ export class CatalogComponent implements OnInit{
   titles: string[] = ['ВСЕ', 'ТЮЛЬПАН', 'РОЗА', 'ХРИЗАНТЕМА', 'АЛЬСТРОМЕРИЯ'];
   curTitle = this.titles[0];
 
-  page = 1;
+  page = 0;
   capacity = 12;
   localCatalog: Bouquet[] = [];
 
@@ -32,7 +32,7 @@ export class CatalogComponent implements OnInit{
       return;
     }
 
-    this.dbService.getCatalogByProdName(this.curTitle).subscribe(result => {
+    this.dbService.getCatalogByProdNameSlice(this.curTitle, this.page, this.capacity).subscribe(result => {
       console.log(result);
       this.localCatalog = result;
     }, error => {

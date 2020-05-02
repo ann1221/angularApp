@@ -36,11 +36,14 @@ body {
 .txtCenter{
   text-align: center;
 }
+.txtJustify{
+  text-align: justify;
+}
+.txtIndent{
+  text-indent: 20px;
+}
 .redFont{
   color: red;
-}
-.purpleFont{
-  color: #800080;
 }
 .greyBg{
   background: #f3f3f3;
@@ -49,12 +52,12 @@ body {
   background: honeydew;
 }
 
-.displaySCFront{
+.playfairFontStyle{
   font-family:  'Playfair Display SC', serif;
   font-weight: lighter;
 }
 
-.vibesFont{
+.vibesFontStyle{
   font-family: 'Great Vibes', cursive;
 }
 

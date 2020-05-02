@@ -22,10 +22,10 @@ export class CatalogProductComponent implements OnInit {
   }
 
   DropFromCart() {
-    this.cookieService.substractFromOrder(this.bouquet.bouquet_id);
+    this.cookieService.substractFromOrder(this.bouquet.bouquetId);
   }
 
   getAmountInOrder(): number {
-    return this.cookieService.getAmountOfBouquet(this.bouquet.bouquet_id);
+    return this.cookieService.getAmountOfBouquet(this.bouquet.bouquetId);
   }
 }
