@@ -82,7 +82,5 @@ body {
 button:active, button:focus {
   outline: none;
 }
-
-
 ::selection {background: rgba(255, 82, 72, 0.86); color:#fff;}
 ::-moz-selection {background: rgba(255, 82, 72, 0.86); color:#fff;}

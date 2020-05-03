@@ -1,3 +1,13 @@
 span{
   color: coral;
 }
+
+.borderShadow{
+  border-radius: 5px;
+  border: #f3f3f3;
+  box-shadow: 7px 7px 10px lightgray;
+}
+
+::ng-deep ngb-modal-window{
+  background: #fadadd;
+}

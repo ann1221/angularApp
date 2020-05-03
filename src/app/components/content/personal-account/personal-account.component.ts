@@ -39,7 +39,8 @@ export class PersonalAccountComponent implements OnInit {
   openDialog( dialogWidth: number){
     const dialogRef = this.dialog.open(PersonalAccountDialogComponent, {
       width: dialogWidth.toString() + 'px',
-      data: this.dialogData
+      data: this.dialogData,
+      panelClass: 'custom-modalbox'
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log(this.dialogData);
@@ -49,7 +50,7 @@ export class PersonalAccountComponent implements OnInit {
 
 @Component({
   selector: 'app-personal-account-dialog',
-  templateUrl: './personal-account-dialog.html',
+  templateUrl: './personal-account-dialog.html'
 })
 
 
@@ -125,7 +126,6 @@ export class PersonalAccountDialogComponent {
         console.log(btoa(controls.email.value + ':' + controls.password.value));
         });
     }
-
     this.dialogRef.close();
   }
 

@@ -24,3 +24,20 @@ div.child{
   display: table-cell;
   vertical-align: middle;
 }
+img{
+  box-shadow: 5px 5px 10px darkgray;
+  position: sticky;
+  top:0;
+}
+
+.borderShadow{
+  border-radius: 5px;
+  border: #f3f3f3;
+  box-shadow: 3px 3px 10px lightgray;
+}
+
+.miniBorderShadow{
+  border-radius: 5px;
+  border: white;
+  box-shadow: 3px 3px 3px lightgrey;
+}
