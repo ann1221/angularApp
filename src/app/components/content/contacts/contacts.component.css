@@ -2,6 +2,13 @@
   border-radius: 100%;
 }
 
+.bigTxt{
+  font-size: 25px;
+}
+.littleTxt{
+  font-size: 15px;
+}
+
 .btn:focus{
   outline: 0 !important;
 }

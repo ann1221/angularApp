@@ -1,8 +1,8 @@
 <div class="minHeight">
-  <div class="wdth70 tbMargin20" *ngIf="!dialogData.isGetClient; else gotClient">
-    <div class="mintBg wdth70 tbMargin20 playfairFontStyle txtJustify borderShadow"
+  <div class="wdth50" style="margin: auto;" *ngIf="!dialogData.isGetClient; else gotClient">
+    <div class="mintBg tbMargin20 playfairFontStyle txtJustify borderShadow"
          style="padding: 20px 30px;">
-      <p class="txtCenter">Доброго времени суток, <span>уважаемый посетитель</span>!</p>
+      <p class="txtCenter">Здравствуй, <span>уважаемый посетитель</span>!</p>
       <div class="txtIndent">
         Мы рады предложить Вам новую функцию нашего сайта &#8212; <span>личный кабинет</span>!
         Если у Вас есть желание <span>отслеживать статус заказа</span> без необходимости
@@ -18,17 +18,83 @@
     </div>
   </div>
   <ng-template #gotClient>
-    <div class="wdth70 tbMargin20">
-      <button mat-raised-button color="warn" (click)="signOut()">Выйти</button>
-      <p class="playfairFontStyle">Данные о клиенте:</p>
-      <div style="display: flex" *ngIf="dialogData.client.fname!=null">
-        Фамилия: {{dialogData.client.fname}}
+    <div class="wdth50 tbMargin20">
+      <div class="">
+        <p class="playfairFontStyle txtCenter" style="font-size: 20px;">ПЕРСОНАЛЬНЫЕ ДАННЫЕ:</p>
+        <div class="borderShadow" style="padding: 20px 2%; background: url(../../../../assets/PersonalAccount/1.jpg) 100%" >
+          <div *ngIf="dialogData.client.fname!='null'">
+            <ngb-alert [dismissible] = false>
+              <strong>Фамилия:</strong> {{dialogData.client.fname}}
+            </ngb-alert>
+          </div>
+          <div *ngIf="dialogData.client.sname!='null'">
+            <ngb-alert [dismissible] = false>
+              <strong>Имя:</strong> {{dialogData.client.sname}}
+            </ngb-alert>
+          </div>
+          <div *ngIf="dialogData.client.lname!='null'">
+            <ngb-alert [dismissible] = false>
+              <strong>Отчество:</strong> {{dialogData.client.lname}}
+            </ngb-alert>
+          </div>
+          <div *ngIf="dialogData.client.email!='null'">
+            <ngb-alert [dismissible] = false>
+              <strong>Email:</strong> {{dialogData.client.email}}
+            </ngb-alert>
+          </div>
+          <div *ngIf="dialogData.client.phone!= null">
+            <ngb-alert [dismissible] = false>
+              <strong>Номер телефона:</strong> {{dialogData.client.phone}}
+            </ngb-alert>
+          </div>
+          <div *ngIf="dialogData.client.address!='null'">
+            <ngb-alert [dismissible] = false>
+              <strong>Адрес доставки:</strong> {{dialogData.client.address}}
+            </ngb-alert>
+          </div>
+        </div>
       </div>
-      <div style="display: flex" *ngIf="dialogData.client.fname!=null">
-        Фамилия: {{dialogData.client.sname}}
+      <div class="tbMargin20">
+        <p *ngIf="isExistEmptyFields()" class="playfairFontStyle txtCenter" style="font-size: 20px;">ДОПОЛНИТЬ ПЕРСОНАЛЬНЫЕ ДАННЫЕ:</p>
+        <div class="borderShadow" style="padding: 20px 2%; background: url(../../../../assets/PersonalAccount/2.jpg) 100%" >
+          <div *ngIf="dialogData.client.lname =='null'">
+            <ngb-alert [dismissible] = false type="success">
+              <mat-form-field class="wdth100">
+                <mat-label>Отчество</mat-label>
+                <input matInput>
+              </mat-form-field>
+            </ngb-alert>
+          </div>
+          <div *ngIf="dialogData.client.email=='null'">
+            <ngb-alert [dismissible] = false type="success">
+              <mat-form-field class="wdth100">
+                <mat-label>Email</mat-label>
+                <input matInput>
+              </mat-form-field>
+            </ngb-alert>
+          </div>
+          <div *ngIf="dialogData.client.phone == null">
+            <ngb-alert [dismissible] = false type="success">
+              <mat-form-field class="wdth100">
+                <mat-label>Номер телефона</mat-label>
+                <input matInput>
+              </mat-form-field>
+            </ngb-alert>
+          </div>
+          <div *ngIf="dialogData.client.address =='null'">
+            <ngb-alert [dismissible] = false type="success">
+              <mat-form-field class="wdth100">
+                <mat-label>Адрес доставки</mat-label>
+                <input matInput>
+              </mat-form-field>
+            </ngb-alert>
+          </div>
+        </div>
       </div>
-      <div style="display: flex" *ngIf="dialogData.client.fname!=null">
-        Фамилия: {{dialogData.client.lname}}
+      <div class="txtCenter">
+        <button mat-fab (click)="signOut()" color="warn">
+          <mat-icon>directions_run</mat-icon>
+        </button>
       </div>
     </div>
   </ng-template>

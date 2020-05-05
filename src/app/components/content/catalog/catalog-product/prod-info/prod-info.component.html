@@ -2,15 +2,14 @@
   <div *ngIf="this.bouquet; else bouquetNotFoundError">
 
     <div id="header" class="tbMargin20">
-      <hr>
+      <mat-divider></mat-divider>
       <h1 class="txtCenter playfairFontStyle">{{bouquet.name}}</h1>
-      <hr>
+      <mat-divider></mat-divider>
     </div>
 
     <div id="body" class="wdth100" style="display: flex;">
-
       <div class="wdth50">
-        <img class="pictBorderShadow" src="{{this.bouquet.pictUrl}}" width="100%">
+        <img class="borderShadow" src="{{this.bouquet.pictUrl}}" width="100%">
       </div>
 
       <div class="wdth50" style="margin-left: 3%;">
@@ -23,10 +22,10 @@
 
         <div *ngFor="let prodInBouq of bouquet.productsInBouquet" class="txtCenter" style="margin: 5px auto;">
           <div style="display: flex;" class="wdth100">
-            <div class="wdth70 mintBg miniBorderShadow" style="padding: 3% 1%" >
+            <div class="wdth70 mintBg borderShadow" style="padding: 3% 1%" >
               {{prodInBouq.product.name}}
             </div>
-            <div class="mintBg miniBorderShadow" style="width: 25%; padding: 3% 3%; margin-left: 3%; vertical-align: middle">
+            <div class="mintBg borderShadow" style="width: 25%; padding: 3% 3%; margin-left: 3%; vertical-align: middle">
               {{prodInBouq.amount}}шт.
             </div>
           </div>

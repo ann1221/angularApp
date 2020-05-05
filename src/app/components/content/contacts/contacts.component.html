@@ -1,26 +1,31 @@
 <div class="minHeight tbMargin20">
-  <mat-grid-list cols="1" rowHeight="3:1">
+  <mat-grid-list cols="1" rowHeight="4:1">
     <mat-grid-tile>
       <img src="{{partImgPath}}{{endsOfPath[0]}}" width="100%">
     </mat-grid-tile>
   </mat-grid-list>
 
-  <div class="wdth80 tbMargin20 txtCenter" style="display: flex;">
-    <div style="margin: auto 1% auto 1%; width: 45%;">
-      <img src="{{partImgPath}}{{endsOfPath[1]}}" width="50%" class="roundImg">
-      <p style="font-size: 30px;">Каждый <span class="redFont">букет</span>  &#8212; искусство</p>
-      <p style="font-size: 20px;">
-        Мы изготавливаем каждый букет персонально, тщательно прорабатывая каждое наше творение.
-      </p>
+  <div class="wdth70 tbMargin20" style="display: flex">
+    <div style="width: 40%">
+      <div class="txtCenter tbMargin20 wdth80" style="position: sticky; top: 0;">
+        <img src="{{partImgPath}}{{endsOfPath[1]}}" width="80%" class="roundImg">
+        <p class="playfairFontStyle bigTxt">Каждый <span class="redFont">букет</span>  &#8212; искусство</p>
+        <p class="littleTxt">
+          Мы изготавливаем каждый букет персонально, тщательно прорабатывая каждое наше творение.
+        </p>
+      </div>
     </div>
-    <div style="margin: auto 1% auto 1%; width: 45%; padding-left: 1%; padding-right: 1%;">
-      <p class="txtCenter" style="font-size: 30px;">Давайте поддерживать<span class="redFont"> связь!</span></p>
-      <p style="font-size: 20px;">
-        Мы будем очень рады вашей критике, оставляйте нам свои комментарии и пожелания и вместе с вами мы будем становиться лучше!
-      </p>
 
-      <form [formGroup]="commentReactiveForm">
+    <div style="width: 60%;">
+      <div class="borderShadow" style="margin: auto 1% auto 1%; padding: 1% 3%;">
+        <p class="txtCenter bigTxt playfairFontStyle">Давайте поддерживать<span class="redFont"> связь!</span></p>
+        <p class="txtIndent txtJustify littleTxt">
+          Мы будем очень рады вашей критике, оставляйте нам свои комментарии и пожелания и вместе с вами мы будем становиться лучше!
+        </p>
+      </div>
 
+      <form [formGroup]="commentReactiveForm" class="borderShadow tbMargin20" style="padding: 1% 3%;">
+        <p class="playfairFontStyle txtCenter bigTxt">ОСТАВИТЬ ОТЗЫВ:</p>
         <mat-form-field class="wdth100">
           <mat-label for="fname">Фамилия</mat-label>
           <input matInput placeholder="Введите свою фамилию" id="fname" formControlName="fname" value="">
@@ -38,11 +43,13 @@
 
         <button mat-button color="primary" style="width: 100%" (click)="onSubmit()" >Отправить</button>
 
-        <mat-grid-list cols="4" rowHeight="1:1" style="margin-top: 10px;">
-          <mat-grid-tile *ngFor="let item of endsOfPath | slice:2">
-            <img src="{{partImgPath}}{{item}}" width="100%">
-          </mat-grid-tile>
-        </mat-grid-list>
+        <div style="border-radius: 5px;">
+          <mat-grid-list cols="4" rowHeight="1:1" style="margin-top: 10px;">
+            <mat-grid-tile *ngFor="let item of endsOfPath | slice:2">
+              <img src="{{partImgPath}}{{item}}" width="100%">
+            </mat-grid-tile>
+          </mat-grid-list>
+        </div>
 
       </form>
     </div>

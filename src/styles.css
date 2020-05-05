@@ -50,6 +50,7 @@ body {
 }
 .mintBg{
   background: honeydew;
+  /*background: rgb(212, 237, 218);*/
 }
 
 .playfairFontStyle{
@@ -62,7 +63,7 @@ body {
 }
 
 .minHeight{
-  min-height: 500px;
+  min-height: 350px;
 }
 
 .scale img {
@@ -82,5 +83,12 @@ body {
 button:active, button:focus {
   outline: none;
 }
+
+.borderShadow{
+  border-radius: 5px;
+  border: #f3f3f3;
+  box-shadow: 4px 4px 7px lightgray;
+}
+
 ::selection {background: rgba(255, 82, 72, 0.86); color:#fff;}
 ::-moz-selection {background: rgba(255, 82, 72, 0.86); color:#fff;}

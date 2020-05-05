@@ -7,15 +7,6 @@ h1{
 h3{
   font-size: 20px;
 }
-
-hr {
-  width: 100%;
-  border: none; /* Убираем границу для браузера Firefox */
-  color: lightgrey; /* Цвет линии для остальных браузеров */
-  background-color: lightgrey; /* Цвет линии для браузера Firefox и Opera */
-  height: 1px; /* Толщина линии */
-}
-
 div.parent{
   display: table;
 }
@@ -30,14 +21,3 @@ img{
   top:0;
 }
 
-.borderShadow{
-  border-radius: 5px;
-  border: #f3f3f3;
-  box-shadow: 3px 3px 10px lightgray;
-}
-
-.miniBorderShadow{
-  border-radius: 5px;
-  border: white;
-  box-shadow: 3px 3px 3px lightgrey;
-}

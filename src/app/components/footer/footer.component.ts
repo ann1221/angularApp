@@ -42,17 +42,18 @@ export class FooterComponent implements OnInit {
       this.orderService.openSnackBar('Пожалуйта, введите почту корректно', 'Ок', 3000);
 
       return;
-
     }
 
-    console.log(this.emailReactiveForm.value['email']);
+    console.log(this.emailReactiveForm.value.email);
 
-    this.orderService.sendEmail(this.emailReactiveForm.value['email']).subscribe(result => {
+    this.orderService.sendEmail(this.emailReactiveForm.value.email).subscribe(result => {
       console.log('email for sending: ' + result);
     });
 
     this.orderService.openSnackBar('Вы успешно подписались на нашу новостную рассылку',
       'Ок', 3000);
-    this.initForm();
+
+   // this.emailReactiveForm.reset();
+
   }
 }

@@ -56,12 +56,6 @@ export class UserFormComponent implements OnInit {
           Validators.required
         ]
       ],
-      email: ['',
-        [
-          Validators.required,
-          Validators.email
-        ]
-      ],
       state: ['',
         [
           Validators.required
@@ -97,8 +91,7 @@ export class UserFormComponent implements OnInit {
       lname: controls.lname.value,
       phone: controls.phone.value,
       address: controls.state.value.trim() + ';' + controls.city.value.trim() +
-        ';' + controls.postalCode.value.trim() + ';' + controls.address.value.trim(),
-      email: controls.email.value.trim()
+        ';' + controls.postalCode.value.trim() + ';' + controls.address.value.trim()
     };
 
     const heads = { 'content-type': 'application/json'};
@@ -113,7 +106,6 @@ export class UserFormComponent implements OnInit {
     }, error => {
         this.dbService.openSnackBar('Возникла ошибка сервера, возможно, часть товара была раскуплена',
           'Ок', 10000);
-        // this.dbService.SetCatalog();
         console.log('not received');
     });
   }
@@ -128,9 +120,7 @@ export class UserFormComponent implements OnInit {
 
   isControlInvalid(controlName: string): boolean {
     const control = this.clientReactiveForm.controls[controlName];
-
     const result = control.invalid && control.touched;
-
     return result;
   }
 }

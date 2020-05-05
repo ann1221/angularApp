@@ -1,8 +1,5 @@
-.borderShadow{
+.card{
   padding: 1%;
-  border: 1px solid lightgrey;
-  border-radius: 5px;
-  box-shadow: 0 0 10px gray;
   width: 23%;
   display: inline-block;
   margin: 15px 1% 15px 1%;

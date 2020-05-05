@@ -29,6 +29,8 @@ export class PersonalAccountComponent implements OnInit, AfterContentInit {
               public  dbService: DBService,
               public cookieService: CookieServiceService) { }
 
+  path = '../../../../assets/PersonalAccount/';
+
   ngOnInit(): void {
   }
 
@@ -77,13 +79,17 @@ export class PersonalAccountComponent implements OnInit, AfterContentInit {
       console.log('THIS IS I->' + this.dialogData.client.fname);
     });
   }
+
+  isExistEmptyFields(): boolean{
+    return (this.localClient.fname === 'null' || this.localClient.sname === 'null' || this.localClient.lname === 'null'
+      || this.localClient.phone == null || this.localClient.address === 'null' || this.localClient.email === 'null');
+  }
 }
 
 @Component({
   selector: 'app-personal-account-dialog',
   templateUrl: './personal-account-dialog.html'
 })
-
 
 export class PersonalAccountDialogComponent {
   signInForm: FormGroup;

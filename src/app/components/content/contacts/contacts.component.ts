@@ -54,7 +54,8 @@ export class ContactsComponent implements OnInit {
 
     this.orderService.openSnackBar('Мы сохранили Ваш комментарий, благодарим Вас за проявленное внимание!',
       'Ок', 3000);
-    this.initForm();
+
+    this.commentReactiveForm.reset();
   }
 
   isControlInvalid(controlName: string): boolean {
