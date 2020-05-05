@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {AfterContentInit, Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogActions, MatDialogRef, MatDialogModule} from '@angular/material/dialog';
 import {AccountDialogData} from '../../../classes/AccountDialogData';
 import {Client} from '../../../classes/Client';
@@ -6,6 +6,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {init} from 'protractor/built/launcher';
 import {DBService} from '../../../services/d-b.service';
 import {HttpHeaders} from '@angular/common/http';
+import {CookieServiceService} from '../../../services/cookie-service.service';
 
 
 @Component({
@@ -13,17 +14,39 @@ import {HttpHeaders} from '@angular/common/http';
   templateUrl: './personal-account.component.html',
   styleUrls: ['./personal-account.component.css']
 })
-export class PersonalAccountComponent implements OnInit {
-
-  constructor(public dialog: MatDialog) { }
-
+export class PersonalAccountComponent implements OnInit, AfterContentInit {
   localClient: Client = {
     fname: null, sname: null, lname: null,
     phone: null, email: null, address: null
   };
-  dialogData: AccountDialogData = {client: this.localClient, isSigningUp: false};
+
+  dialogData: AccountDialogData = {
+    client: this.localClient,
+    isSigningUp: false,
+    isGetClient: true};
+
+  constructor(public dialog: MatDialog,
+              public  dbService: DBService,
+              public cookieService: CookieServiceService) { }
 
   ngOnInit(): void {
+  }
+
+  ngAfterContentInit() {
+    const btoaVal = this.cookieService.getCid();
+    if (btoaVal == null) {
+      this.dialogData.isGetClient = false;
+      return;
+    }
+    const heads = new HttpHeaders({ Authorization: 'Basic ' + btoaVal});
+    this.dbService.signIn(heads).subscribe(result => {
+      console.log(result);
+      this.dialogData.client = (result as Client);
+      this.dialogData.isGetClient = true;
+    }, error => {
+      console.log('error was occured in sign in');
+      this.dialogData.isGetClient = false;
+    });
   }
 
   signInDialogOpen(){
@@ -36,6 +59,14 @@ export class PersonalAccountComponent implements OnInit {
     this.openDialog(500);
   }
 
+  signOut() {
+    const btoaVal = this.cookieService.getCid();
+    const heads = new HttpHeaders({ Authorization: 'Basic ' + btoaVal});
+    this.cookieService.deleteCid();
+    this.dbService.signOut(heads);
+    this.dialogData.isGetClient = false;
+  }
+
   openDialog( dialogWidth: number){
     const dialogRef = this.dialog.open(PersonalAccountDialogComponent, {
       width: dialogWidth.toString() + 'px',
@@ -43,7 +74,7 @@ export class PersonalAccountComponent implements OnInit {
       panelClass: 'custom-modalbox'
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(this.dialogData);
+      console.log('THIS IS I->' + this.dialogData.client.fname);
     });
   }
 }
@@ -55,22 +86,25 @@ export class PersonalAccountComponent implements OnInit {
 
 
 export class PersonalAccountDialogComponent {
+  signInForm: FormGroup;
+  signUpForm: FormGroup;
+
   constructor(
     public dialogRef: MatDialogRef<PersonalAccountComponent>,
     public fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: AccountDialogData,
-    public dbService: DBService)
+    public dbService: DBService,
+    public cookieService: CookieServiceService)
   {
-    this.initForm();
+    this.initSignInForm();
+    this.initSignUpForm();
   }
 
-  clientReactiveForm: FormGroup;
-
-  initForm(){
+  initSignUpForm(){
     const justLetterPattern = '[a-zA-ZА-Яа-я]*';
-    const justNumbersPattern = '[0-9]*';
+    const withoutRussianLettersPattern = '[^а-яА-Я]*';
 
-    this.clientReactiveForm = this.fb.group({
+    this.signUpForm = this.fb.group({
       fname: ['',
         [
           Validators.required,
@@ -91,42 +125,93 @@ export class PersonalAccountDialogComponent {
       ],
       password: ['',
         [
+          Validators.pattern(withoutRussianLettersPattern),
           Validators.required
         ]
       ]
     });
   }
+
+  initSignInForm() {
+    const withoutRussianLettersPattern = '[^а-яА-Я]*';
+
+    this.signInForm = this.fb.group({
+      email: ['',
+        [
+          Validators.required,
+          Validators.email
+        ]
+      ],
+      password: ['',
+        [
+          Validators.pattern(withoutRussianLettersPattern),
+          Validators.required
+        ]
+      ]
+    });
+  }
+
   onNoClick(): void {
     this.dialogRef.close();
   }
 
   onYesClick(): void {
-    const controls = this.clientReactiveForm.controls;
     if (this.data.isSigningUp){
-      const heads = new HttpHeaders({'content-type': 'application/json'});
-      const client: Client = {
-        fname: controls.fname.value, sname: controls.sname.value,
-        email: controls.email.value, password: controls.password.value,
-        address: null, phone: null, lname: null
-      };
-      this.dbService.signUp(heads, JSON.stringify(client)).subscribe(result => {
-        console.log('OK');
-      },
-        error => {
-        console.log(client);
-        });
+      const controls = this.signUpForm.controls;
+      this.signUp(controls);
     } else {
-      const heads = new HttpHeaders({ Authorization: 'Basic ' + btoa(controls.email.value + ':' + controls.password.value)});
-      heads.append('content-type', 'application/json');
-      this.dbService.signIn(heads).subscribe(result => {
-        console.log(result);
-      },
-        error => {
-        console.log('error was occured');
-        console.log(btoa(controls.email.value + ':' + controls.password.value));
-        });
+      const controls = this.signInForm.controls;
+      this.signIn(controls);
     }
+  }
+
+  signUp(controls) {
+    if (!this.validate(this.signUpForm, controls)) { return; }
+
+    const heads = new HttpHeaders({'content-type': 'application/json'});
+    heads.append('content-type', 'application/json');
+    const client: Client = {
+      fname: controls.fname.value, sname: controls.sname.value,
+      email: controls.email.value, password: controls.password.value,
+      address: null, phone: null, lname: null
+    };
+    this.dbService.signUp(heads, JSON.stringify(client)).subscribe(result => {
+        console.log('OK');
+
+      },
+      error => {
+        console.log(client);
+      });
     this.dialogRef.close();
+  }
+
+  signIn(controls) {
+    console.log(controls.password.value);
+    if (!this.validate(this.signInForm, controls)) { return; }
+
+    const btoaVal =  btoa(controls.email.value + ':' + controls.password.value);
+    const heads = new HttpHeaders({ Authorization: 'Basic ' + btoaVal});
+    heads.append('content-type', 'application/json');
+    this.dbService.signIn(heads).subscribe(result => {
+        console.log(result);
+        this.data.client = (result as Client);
+        this.data.isGetClient = true;
+        this.cookieService.setCid(btoaVal);
+        this.dialogRef.close();
+      }, error => {
+        console.log('error was occured in sign in');
+        this.dbService.openSnackBar('Вы ввели неправильный email или пароль', 'ОК', 3000);
+    });
+  }
+
+  validate(form: FormGroup, controls): boolean{
+    if (form.invalid) {
+      Object.keys(controls)
+        .forEach(controlName => controls[controlName].markAsTouched());
+      this.dbService.openSnackBar('Пожалуйта, заполните все обязательные поля корректно', 'Ок', 3000);
+      return false;
+    }
+    return true;
   }
 
 }

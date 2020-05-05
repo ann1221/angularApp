@@ -56,7 +56,11 @@ export class DBService {
   }
 
   public signIn(heads) {
-    return this.http.get(this.userURL + '/info', {headers: heads});
+    return this.http.get(this.userURL + '/validate', {headers: heads});
+  }
+
+  public signOut(heads) {
+    return this.http.get(this.baseURL + '/logout', {headers: heads});
   }
 
   openSnackBar(message: string, action: string, duration: number) {

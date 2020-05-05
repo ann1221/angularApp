@@ -1,6 +1,5 @@
-
 <div *ngIf="data.isSigningUp">
-  <form [formGroup]="clientReactiveForm">
+  <form [formGroup]="signUpForm">
     <h3>Пожалуйта, заполните форму регистрации:</h3>
     <mat-form-field class="wdth100">
       <mat-label for="fname">Фамилия</mat-label>
@@ -26,7 +25,7 @@
   </form>
 </div>
 <div *ngIf="!data.isSigningUp">
-  <form [formGroup]="clientReactiveForm">
+  <form [formGroup]="signInForm">
     <mat-form-field class="wdth100">
       <mat-label for="email2">Email</mat-label>
       <input matInput id="email2" formControlName="email">

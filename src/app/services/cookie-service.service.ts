@@ -3,6 +3,7 @@ import {CookieService} from 'ngx-cookie-service';
 import {OrderUnit} from '../classes/OrderUnit';
 import {Bouquet} from '../classes/Bouquet';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {HttpHeaders} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -98,6 +99,18 @@ export class CookieServiceService {
       return Number(result);
     }
     return 0;
+  }
+
+  public getCid(){
+    return this.cookieService.get('Cid');
+  }
+
+  public setCid(value) {
+    this.cookieService.set('Cid', value);
+  }
+
+  public deleteCid() {
+    this.cookieService.delete('Cid');
   }
 
   openSnackBar(message: string, action: string, duration: number) {
