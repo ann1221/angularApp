@@ -59,14 +59,26 @@ export class DBService {
     return this.http.get(this.userURL + '/validate', {headers: heads});
   }
 
-  public signOut(heads) {
-    return this.http.get(this.baseURL + '/logout', {headers: heads});
+  public signOut(heads){
+    return this.http.get(this.userURL + '/logout', {headers: heads});
   }
 
   openSnackBar(message: string, action: string, duration: number) {
     this.snackBar.open(message, action, {
       duration,
     });
+  }
+  public sendEmail(email: string){
+    const parametrs = new HttpParams().set('email', email);
+    return this.http.get<number>(`http://localhost:8080/main/` + `sendSimpleEmailParam`, {params: parametrs});
+  }
+
+  public Comment(fname: string, sname: string, commentText: string){
+    const parametrs = new HttpParams()
+      .set('fname', fname)
+      .set('sname', sname)
+      .set('commentText', commentText);
+    return this.http.get<number>(`http://localhost:8080/main/` + `comment`, {params: parametrs});
   }
 }
 

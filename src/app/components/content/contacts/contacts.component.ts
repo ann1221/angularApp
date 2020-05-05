@@ -48,6 +48,13 @@ export class ContactsComponent implements OnInit {
       return;
     }
     console.log(this.commentReactiveForm.value);
+    this.orderService.Comment(this.commentReactiveForm.value.fname, this.commentReactiveForm.value.sname, this.commentReactiveForm.value['comment']).subscribe(result => {
+      console.log(result);
+    });
+
+    this.orderService.openSnackBar('Мы сохранили Ваш комментарий, благодарим Вас за проявленное внимание!',
+      'Ок', 3000);
+    this.initForm();
   }
 
   isControlInvalid(controlName: string): boolean {
@@ -57,5 +64,4 @@ export class ContactsComponent implements OnInit {
 
     return result;
   }
-
 }
