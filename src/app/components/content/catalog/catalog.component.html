@@ -13,4 +13,8 @@
   </ul>
   <div [ngbNavOutlet]="nav" class="mt-2"></div>
   <app-catalog-product *ngFor="let item of localCatalog" [bouquet]="item"></app-catalog-product>
+  <mat-paginator [length]="13"
+                 [pageSize]="capacity"
+                 (page)="pageEvent = $event">
+  </mat-paginator>
 </div>

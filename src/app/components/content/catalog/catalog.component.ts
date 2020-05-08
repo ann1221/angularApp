@@ -1,6 +1,7 @@
 import {AfterContentInit, AfterViewInit, Component, OnInit, Output} from '@angular/core';
 import {DBService} from '../../../services/d-b.service';
 import {Bouquet} from '../../../classes/Bouquet';
+import {PageEvent} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-catalog',
@@ -11,6 +12,7 @@ export class CatalogComponent implements OnInit{
 
   constructor(public dbService: DBService) {
   }
+  pageEvent: PageEvent;
 
   titles: string[] = ['ВСЕ', 'ТЮЛЬПАН', 'РОЗА', 'ХРИЗАНТЕМА', 'АЛЬСТРОМЕРИЯ'];
   curTitle = this.titles[0];
