@@ -1,5 +1,5 @@
 <div class="minHeight">
-  <div class="wdth50" style="margin: auto;" *ngIf="!dialogData.isGetClient; else gotClient">
+  <div class="wdth50" style="margin: auto;" *ngIf="this.dialogData.authStatus == authStatus.FAILED">
     <div class="mintBg tbMargin20 playfairFontStyle txtJustify borderShadow"
          style="padding: 20px 30px;">
       <p class="txtCenter">Здравствуй, <span>уважаемый посетитель</span>!</p>
@@ -17,8 +17,7 @@
       <button style="margin: auto 0.5%;" mat-raised-button (click)="signUpDialogOpen()">ЗАРЕГИСТРИРОВАТЬСЯ</button>
     </div>
   </div>
-  <ng-template #gotClient>
-    <div class="wdth50 tbMargin20">
+    <div class="wdth50 tbMargin20" *ngIf="this.dialogData.authStatus == authStatus.SUCCESS">
       <div class="">
         <p class="playfairFontStyle txtCenter" style="font-size: 20px;">ПЕРСОНАЛЬНЫЕ ДАННЫЕ:</p>
         <div class="borderShadow" style="padding: 20px 2%; background: url(../../../../assets/PersonalAccount/1.jpg) 100%" >
@@ -97,6 +96,6 @@
         </button>
       </div>
     </div>
-  </ng-template>
+
 </div>
 

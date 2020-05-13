@@ -1,12 +1,13 @@
-import {AfterContentInit, Component, Inject, OnInit} from '@angular/core';
+import {AfterContentInit, Component, DoCheck, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogActions, MatDialogRef, MatDialogModule} from '@angular/material/dialog';
-import {AccountDialogData} from '../../../classes/AccountDialogData';
+import {AccountDialogData, AuthStatus} from '../../../classes/AccountDialogData';
 import {Client} from '../../../classes/Client';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {init} from 'protractor/built/launcher';
 import {DBService} from '../../../services/d-b.service';
 import {HttpHeaders} from '@angular/common/http';
 import {CookieServiceService} from '../../../services/cookie-service.service';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -14,16 +15,19 @@ import {CookieServiceService} from '../../../services/cookie-service.service';
   templateUrl: './personal-account.component.html',
   styleUrls: ['./personal-account.component.css']
 })
-export class PersonalAccountComponent implements OnInit, AfterContentInit {
+export class PersonalAccountComponent implements OnInit {
   localClient: Client = {
     fname: null, sname: null, lname: null,
     phone: null, email: null, address: null
   };
+  // --special for HTML enum usage
+  authStatus = AuthStatus;
 
   dialogData: AccountDialogData = {
     client: this.localClient,
-    isSigningUp: false,
-    isGetClient: true};
+    isSigningUp: true,
+    authStatus: AuthStatus.UNDEFINED
+  };
 
   constructor(public dialog: MatDialog,
               public  dbService: DBService,
@@ -32,23 +36,22 @@ export class PersonalAccountComponent implements OnInit, AfterContentInit {
   path = '../../../../assets/PersonalAccount/';
 
   ngOnInit(): void {
-  }
-
-  ngAfterContentInit() {
     const btoaVal = this.cookieService.getCid();
     if (btoaVal == null) {
-      this.dialogData.isGetClient = false;
+      this.dialogData.authStatus = AuthStatus.FAILED;
       return;
     }
     const heads = new HttpHeaders({ Authorization: 'Basic ' + btoaVal});
     this.dbService.signIn(heads).subscribe(result => {
       console.log(result);
+      this.dialogData.authStatus = AuthStatus.SUCCESS;
       this.dialogData.client = (result as Client);
-      this.dialogData.isGetClient = true;
+      // this.dialogData.isGetClient = true;
     }, error => {
       console.log('error was occured in sign in');
-      this.dialogData.isGetClient = false;
+      this.dialogData.authStatus = AuthStatus.FAILED;
     });
+    console.log('ngOnInit');
   }
 
   signInDialogOpen(){
@@ -65,15 +68,18 @@ export class PersonalAccountComponent implements OnInit, AfterContentInit {
     const btoaVal = this.cookieService.getCid();
     const heads = new HttpHeaders({ Authorization: 'Basic ' + btoaVal});
     this.cookieService.deleteCid();
-    this.dbService.signOut(heads);
-    this.dialogData.isGetClient = false;
+    this.dbService.signOut(heads).subscribe(result => {
+      console.log(result);
+    }, error => {
+      console.log(error);
+      });
+    this.dialogData.authStatus = AuthStatus.FAILED;
   }
 
   openDialog( dialogWidth: number){
     const dialogRef = this.dialog.open(PersonalAccountDialogComponent, {
       width: dialogWidth.toString() + 'px',
-      data: this.dialogData,
-      panelClass: 'custom-modalbox'
+      data: this.dialogData
     });
     dialogRef.afterClosed().subscribe(result => {
       console.log('THIS IS I->' + this.dialogData.client.fname);
@@ -100,7 +106,8 @@ export class PersonalAccountDialogComponent {
     public fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: AccountDialogData,
     public dbService: DBService,
-    public cookieService: CookieServiceService)
+    public cookieService: CookieServiceService,
+    private router: Router)
   {
     this.initSignInForm();
     this.initSignUpForm();
@@ -159,6 +166,7 @@ export class PersonalAccountDialogComponent {
 
   onNoClick(): void {
     this.dialogRef.close();
+    // this.router.navigate(['/catalog']);
   }
 
   onYesClick(): void {
@@ -183,7 +191,6 @@ export class PersonalAccountDialogComponent {
     };
     this.dbService.signUp(heads, JSON.stringify(client)).subscribe(result => {
         console.log('OK');
-
       },
       error => {
         console.log(client);
@@ -192,7 +199,6 @@ export class PersonalAccountDialogComponent {
   }
 
   signIn(controls) {
-    console.log(controls.password.value);
     if (!this.validate(this.signInForm, controls)) { return; }
 
     const btoaVal =  btoa(controls.email.value + ':' + controls.password.value);
@@ -200,12 +206,14 @@ export class PersonalAccountDialogComponent {
     heads.append('content-type', 'application/json');
     this.dbService.signIn(heads).subscribe(result => {
         console.log(result);
+        this.data.authStatus = AuthStatus.SUCCESS;
         this.data.client = (result as Client);
-        this.data.isGetClient = true;
+
         this.cookieService.setCid(btoaVal);
         this.dialogRef.close();
       }, error => {
         console.log('error was occured in sign in');
+        this.data.authStatus = AuthStatus.FAILED;
         this.dbService.openSnackBar('Вы ввели неправильный email или пароль', 'ОК', 3000);
     });
   }
