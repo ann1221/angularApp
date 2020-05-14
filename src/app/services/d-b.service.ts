@@ -4,6 +4,7 @@ import {CookieService} from 'ngx-cookie-service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Bouquet} from '../classes/Bouquet';
 import {Observable} from 'rxjs';
+import {Comment} from '../classes/Comment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +14,9 @@ export class DBService {
   baseURL = 'http://localhost:8080';
   mainURL = this.baseURL + '/main';
   userURL = this.baseURL + '/user';
+  header = { 'content-type': 'application/json'};
 
-  constructor(public cookieService: CookieService,
-              public http: HttpClient,
+  constructor(public http: HttpClient,
               private snackBar: MatSnackBar) {
   }
 
@@ -37,15 +38,6 @@ export class DBService {
     return this.http.get<Bouquet[]>(this.mainURL + '/bouquets/byProdName/' + start + '/' + capacity , {params: parametrs});
   }
 
-  // public getCatalog(): Observable<Bouquet[]> {
-  //   return this.http.get<Bouquet[]>(this.baseURL + '/bouquets');
-  // }
-
-  // public getCatalogByProdName(prodName): Observable<Bouquet[]> {
-  //   const parametrs = new HttpParams().set('prodName', prodName);
-  //   return this.http.get<Bouquet[]>(this.baseURL + '/bouquets/byProdName/' , {params: parametrs});
-  // }
-
   public addClientOrder(heads, body, parametrs){
     return this.http.post(this.mainURL + '/orders/new', body,
       {headers: heads, params: parametrs});
@@ -63,22 +55,19 @@ export class DBService {
     return this.http.get(this.userURL + '/logout', {headers: heads});
   }
 
+  public addSubscriber(email: string){
+    const parametrs = new HttpParams().set('email', email);
+    return this.http.post(this.mainURL + '/subscribers/add', null, {headers: this.header, params: parametrs});
+  }
+
+  public addComment(comment: Comment){
+    return this.http.post(this.mainURL + '/comments/add',  JSON.stringify(comment), {headers: this.header});
+  }
+
   openSnackBar(message: string, action: string, duration: number) {
     this.snackBar.open(message, action, {
       duration,
     });
-  }
-  public sendEmail(email: string){
-    const parametrs = new HttpParams().set('email', email);
-    return this.http.get<number>(`http://localhost:8080/main/` + `sendSimpleEmailParam`, {params: parametrs});
-  }
-
-  public Comment(fname: string, sname: string, commentText: string){
-    const parametrs = new HttpParams()
-      .set('fname', fname)
-      .set('sname', sname)
-      .set('commentText', commentText);
-    return this.http.get<number>(`http://localhost:8080/main/` + `comment`, {params: parametrs});
   }
 }
 

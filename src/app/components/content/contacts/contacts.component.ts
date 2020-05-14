@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Comment} from '../../../classes/Comment';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DBService} from '../../../services/d-b.service';
 
@@ -48,12 +49,18 @@ export class ContactsComponent implements OnInit {
       return;
     }
     console.log(this.commentReactiveForm.value);
-    this.orderService.Comment(this.commentReactiveForm.value.fname, this.commentReactiveForm.value.sname, this.commentReactiveForm.value['comment']).subscribe(result => {
-      console.log(result);
+    const comment: Comment = {
+      fname: this.commentReactiveForm.value.fname,
+      sname: this.commentReactiveForm.value.sname,
+      text: this.commentReactiveForm.value.comment};
+    this.orderService.addComment(comment).subscribe(result => {
+      this.orderService.openSnackBar('Мы сохранили Ваш комментарий, благодарим Вас за проявленное внимание!',
+        'Ок', 3000);
+
+    }, error => {
+      console.log(error);
     });
 
-    this.orderService.openSnackBar('Мы сохранили Ваш комментарий, благодарим Вас за проявленное внимание!',
-      'Ок', 3000);
 
     this.commentReactiveForm.reset();
   }

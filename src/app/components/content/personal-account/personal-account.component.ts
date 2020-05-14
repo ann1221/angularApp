@@ -193,7 +193,8 @@ export class PersonalAccountDialogComponent {
         console.log('OK');
       },
       error => {
-        console.log(client);
+        this.dbService.openSnackBar('Ошибка. Аккаунт с такой почтой уже существует.', 'ОКК', 5000);
+        console.log('error was occured in signUp');
       });
     this.dialogRef.close();
   }
