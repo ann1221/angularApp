@@ -111,8 +111,9 @@ export class UserFormComponent implements OnInit {
   }
 
   GetOrder(){
+    const order = this.cookieService.buildOrder();
     const map: { [key: string]: string} = {};
-    for (const orderUnit of this.cookieService.buildOrder()) {
+    for (const orderUnit of order) {
       map[orderUnit.bouquetId.toString()] = orderUnit.amount.toString();
     }
     return map;
